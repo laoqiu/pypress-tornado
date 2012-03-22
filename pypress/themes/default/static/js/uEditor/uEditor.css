@@ -103,6 +103,9 @@
 .uEditor ul.uEditorToolbar li a.uEditorButtonStrikeThrough {
     background-image: url('img/strikethrough.png');
 }
+.uEditor ul.uEditorToolbar li a.uEditorButtonPagebreaks {
+    background-image: url('img/pagebreaks.png');
+}
 .uEditor ul.uEditorToolbar li a.myButtonClass,
 .uEditor ul.uEditorToolbar li a.mySecondButtonClass {
     background: url(img/plugin.png);

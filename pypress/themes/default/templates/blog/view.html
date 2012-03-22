@@ -17,7 +17,8 @@ $(function(){
     <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
 </div>
 <div class="post-content">
-    {{ post.content }}
+    {% from pypress.helpers import code_highlight %}
+    {{ code_highlight(post.content) }}
 </div>
 <div class="post-foot">
     {% if post.prev_post %}<span class="prev">prev: <a href="{{ post.prev_post.url }}" title="prev post">{{ post.prev_post.title }}</a></span>{% end %}

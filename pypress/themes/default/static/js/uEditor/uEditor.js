@@ -1195,7 +1195,7 @@
                 }
             },
             pagebreaks : {
-                className : 'uEditorPagebreaks',
+                className : 'uEditorButtonPagebreaks',
                 action : function(){
                     var editor = $.data(this, 'editor');
                     if(!editor.wysiwyg) return;

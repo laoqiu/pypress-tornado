@@ -7,7 +7,8 @@
         <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
     </div>
     <div class="post-content">
-        {{ post.summary }}
+        {% from pypress.helpers import code_highlight %}
+        {{ code_highlight(post.summary) }}
         {% if post.summary!=post.content %}<a href="{{ post.url }}" class="more">Read more...</a>{% end %}
     </div>
 </div>
