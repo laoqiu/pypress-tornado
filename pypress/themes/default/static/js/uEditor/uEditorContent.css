@@ -1,25 +1,58 @@
 /* HTML TAGS */
+html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
+    margin: 0;
+    padding: 0;
+}
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size:14px;
-	line-height:20px;
-	background: #fff;
-	color:#333;
+    padding: 10px;
+    font: 0.75em/1.5em 'Georgia',Verdana,Arial,sans-serif;
+    color: #333;
+    background: #fff;
 }
-a {
-	color:#187076 !important;
+
+h1 {
+    font-size: 20px;
+    line-height: 2em;
+}
+h2 {
+    font-size: 18px;
+    line-height: 2em;
 }
 h3 {
-	color:#00B3BE;
-	font-family:Georgia,Times,serif;
-	font-size:20px;
-	margin:10px 0;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+h4,h5,h6 {
+    font-size: 12px;
+    line-height: 1.5em;
 }
 
-/* OBJECTS */
+input, textarea {
+    font-size: 14px;
+}
 
+a:link, a:visited {
+    color: #06c;
+    text-decoration: none;
+}
+a:hover {
+    color: #666;
+}
 
+a img {
+  border: 0;
+}
 
+blockquote {
+    color: #555;
+    font-style: italic;
+    font-size: 17px;
+}
 
-/* CLASSES */
+p {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+

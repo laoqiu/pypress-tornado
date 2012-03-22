@@ -7,3 +7,4 @@
 *.pid
 *.db
 *.swp
+local*

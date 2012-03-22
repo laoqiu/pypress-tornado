@@ -283,6 +283,9 @@ blockquote {
 .post-content hr {
     display: none;
 }
+.post-content p {
+    margin: 10px auto;
+}
 
 .post-meta {
     padding: 5px 0;

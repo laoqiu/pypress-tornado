@@ -1,5 +1,8 @@
 {% extends "../base.html" %}
 {% block title %}{{ post.title }}{% end %}
+{% block css %}
+<link rel="stylesheet" href="/static/highlight.css" />
+{% end %}
 {% block js %}
 <script type="text/javascript" src="/static/js/blog.js"></script>
 <script type="text/javascript">
@@ -15,6 +18,11 @@ $(function(){
     <span class="post-at">at: {{ post.created_date }}</span>
     <span class="post-tags">tags: {% for tag, url in post.linked_taglist %}<a href="{{ url }}" title="{{ tag }}">{{ tag }}</a> {% end %}</span>
     <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
+    {% if post.permissions.edit.can(handler.identity) %}
+    <span class="post-admin">
+        admin: <a href="{{ reverse_url('post_edit', post.id) }}" title="edit this post">{{ _("edit") }}</a>
+    </span>
+    {% end %}
 </div>
 <div class="post-content">
     {% from pypress.helpers import code_highlight %}

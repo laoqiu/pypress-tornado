@@ -1,5 +1,8 @@
 {% extends "../base.html" %}
 {% block title %}{{ people.username }}{% end %}
+{% block css %}
+<link rel="stylesheet" href="/static/highlight.css" />
+{% end %}
 {% block content %}
 <h1>People: {{ people.username }}</h1>
 <div id="post-list">
