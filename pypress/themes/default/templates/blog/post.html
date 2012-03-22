@@ -1,0 +1,48 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Post Now") }}{% end %}
+{% block js %}
+    <script type="text/javascript" src="/static/js/uEditor/uEditor.js"></script>
+    <link rel="stylesheet" href="/static/js/uEditor/uEditor.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+    $(function() {
+        $('#content').uEditor({
+            stylesheet : '/static/js/uEditor/uEditorContent.css',
+            containerClass : 'uEditor',
+            uploadURL : '/upload'
+        });
+        $('a.image').click(function(){
+            $('.uEditorToolbar li a.uEditorButtonImage').click();
+        })
+    });
+    </script>
+{% end %}
+{% block content %}
+<div id="post-form" class="form">
+    <h2>{{ _("Post Now") }}</h2>
+    {% from pypress.filters import field_errors %}
+    <form action="" method="POST">
+        {{ xsrf_form_html() }}
+        <div class="form-field">
+            {{ form.title.label() }} 
+            {{ form.title(class_="text") }}
+            {{ field_errors(form.title) }}
+        </div>
+        <div class="form-field">
+            {{ form.slug.label() }} 
+            {{ form.slug(class_="text") }}
+            {{ field_errors(form.slug) }}
+        </div>
+        <div class="form-field">
+            {{ form.content.label() }} 
+            {{ form.content() }}
+            {{ field_errors(form.content) }}
+        </div>
+        <div class="form-field">
+            {{ form.tags.label() }} 
+            {{ form.tags(class_="text") }}
+            {{ field_errors(form.tags) }}
+        </div>
+        <div class="form-field">{{ form.submit(class_="form-button") }} </div>
+    </form>
+</div>
+{% end %}

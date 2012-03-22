@@ -1,0 +1,15 @@
+{% extends "../base.html" %}
+{% block title %}Archives{% end %}
+{% block content %}
+<h1>Archives</h1>
+<div class="archives">
+    <ul>
+    {% for post in page_obj.items %}
+    <li>
+        <span>{{ post.created_date.strftime('%Y-%m-%d') }}</span>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% end %}
+    </ul>
+</div>
+{% end %}

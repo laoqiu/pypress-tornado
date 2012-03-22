@@ -1,0 +1,83 @@
+{% extends "../base.html" %}
+{% block title %}{{ post.title }}{% end %}
+{% block js %}
+<script type="text/javascript" src="/static/js/blog.js"></script>
+<script type="text/javascript">
+$(function(){
+    get_captcha('{{ reverse_url('get_captcha') }}');
+})
+</script>
+{% end %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<div class="post-meta">
+    <span class="post-author">author: {{ post.author.username }}</span>
+    <span class="post-at">at: {{ post.created_date }}</span>
+    <span class="post-tags">tags: {% for tag, url in post.linked_taglist %}<a href="{{ url }}" title="{{ tag }}">{{ tag }}</a> {% end %}</span>
+    <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
+</div>
+<div class="post-content">
+    {{ post.content }}
+</div>
+<div class="post-foot">
+    {% if post.prev_post %}<span class="prev">prev: <a href="{{ post.prev_post.url }}" title="prev post">{{ post.prev_post.title }}</a></span>{% end %}
+    {% if post.next_post %}<span class="next">next: <a href="{{ post.next_post.url }}" title="next post">{{ post.next_post.title }}</a></span>{% end %}
+</div>
+
+<div id="comments">
+    <div class="comment-add">
+        <h3>{{ _('Add a comment') }}</h3>
+        <form id="comment-form" method="POST" action="#comments">
+        {% from pypress.filters import field_errors %}
+        {{ xsrf_form_html() }}
+        {% if current_user %}
+            {{ form.email(type='hidden',value=current_user.email) }}
+            {{ form.nickname(type='hidden',value=current_user.nickname) }}
+            {{ form.website(type='hidden') }}
+        {% else %}                    
+            <p>
+                {{ form.email.label() }}
+                {{ form.email(class_="text") }} 
+                {{ field_errors(form.email) }}
+            </p>
+            <p>
+                {{ form.nickname.label() }}
+                {{ form.nickname(class_="text") }} 
+                {{ field_errors(form.nickname) }}
+            </p>
+            <p>
+                {{ form.website.label() }}
+                {{ form.website(class_="text") }} 
+                {{ field_errors(form.website) }}
+            </p>
+        {% end %}
+            <p>
+                {{ form.comment.label() }}
+                {{ form.comment(class_="text") }}
+                {{ field_errors(form.comment) }}
+            </p>
+            <p>
+                {{ form.captcha.label() }}
+                {{ form.captcha(class_="text") }}
+                <a href="javascript: get_captcha('{{ reverse_url('get_captcha') }}');" title="看不清楚，换一张"><img id="captcha-image" src="/static/images/blank.gif" /></a>
+                {{ field_errors(form.captcha) }}
+            </p>
+            <p>{{ form.submit(class_="button") }}</p>
+        </form>
+    </div>
+
+    <div class="comment-list">
+        <h3>{{ _('Comments') }}</h3>
+        {% if post.comments %}
+        <ol>
+            {% for comment in post.comments %}
+                {% module Comment(comment, form) %}
+            {% end %}
+        </ol>            
+        {% else %}
+        <p>{{ _('No comments have been posted yet.') }}</p>
+        {% end %}
+    </div>
+    
+</div>
+{% end %}

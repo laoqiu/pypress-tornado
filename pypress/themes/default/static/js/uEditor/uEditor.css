@@ -1,0 +1,289 @@
+.uEditor {
+    float: left;
+    width: 650px;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid #CED5E0;
+    overflow: hidden;
+}
+.uEditor, 
+.uEditor .uEditorIframe,
+.uEditor textarea.uEditorTextarea
+{
+    height: 300px;
+}
+.uEditor ul.uEditorToolbar {
+    background: #F8FAFD;
+    border-bottom:1px solid #CED5E0;
+    list-style: none;
+    height: 22px;
+    margin: 0;
+    padding:5px;
+    margin:0;
+}
+.uEditor ul.uEditorToolbar li {
+    display:inline;
+    margin: 0 5px 0 0;
+    float:left;
+    cursor:pointer;
+}
+.uEditor ul.uEditorToolbar li a {
+    color:#999;
+    display:inline;
+    margin: 0;
+    padding: 2px;
+    float:left;
+    cursor:pointer;
+    text-indent:-1000px;
+    width:16px;
+    height:16px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.uEditor ul.uEditorToolbar li a.on {
+    border-color: #729BD1;
+    background-color: #DDE1EB;
+}
+.uEditor ul.uEditorToolbar li a.off {
+    cursor: default;
+    opacity: 0.3;
+}	
+
+.uEditor ul.uEditorToolbar li a.uEditorButtonBold {
+    background-image: url('img/b.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonItalic  {
+    background-image: url('img/i.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonUnderline  {
+    background-image: url('img/underline.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonOrderedList {
+    background-image: url('img/ol.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonUnorderedList {
+    background-image: url('img/ul.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonHyperlink {
+    background-image: url('img/link.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonImage {
+    background-image: url('img/image.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonHTML {
+    background-image: url('img/source.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonJustifyLeft {
+    background-image: url('img/justifyleft.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonJustifyCenter {
+    background-image: url('img/justifycenter.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonJustifyRight {
+    background-image: url('img/justifyright.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonIndent {
+    background-image: url('img/indent.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonOutdent {
+    background-image: url('img/outdent.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonColor {
+    width: 24px;
+    background-image: url('img/color.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonBgColor {
+    width: 24px;
+    background-image: url('img/bgcolor.png');
+}
+.uEditor ul.uEditorToolbar li a.uEditorButtonStrikeThrough {
+    background-image: url('img/strikethrough.png');
+}
+.uEditor ul.uEditorToolbar li a.myButtonClass,
+.uEditor ul.uEditorToolbar li a.mySecondButtonClass {
+    background: url(img/plugin.png);
+}
+
+.uEditor ul.uEditorToolbar li.uEditorEditSelect {
+    margin:0;
+    padding:0;
+}
+.uEditor ul.uEditorToolbar li a:hover {
+    border-color: #DDE1EB;
+}
+.uEditor ul.uEditorToolbar li a.on:hover {
+    border-color: #A1BADF;
+}
+.uEditor .uEditorIframe {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 262px;
+    border: 0;
+}
+.uEditor textarea.uEditorTextarea
+{
+    clear: both;
+    width: 100%;
+    border: none;
+    font-family:monospace;
+}
+.uEditor-button {
+    cursor: pointer;
+    padding: 2px 10px;
+    border: 1px solid #ccc;
+    border-color: #aaa #aaa #666;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow:0 1px 3px #ddd;
+    color: #555;
+    background: #f5f5f5 url("img/bg_button.png");
+    font-size: 14px;
+    font-weight: bold;
+}
+.uEditor-overlay {
+    position: absolute;
+    z-index: 90;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: gray;
+}
+.uEditor-dialog {
+    position: absolute;
+    background-color: #FBFBFB;
+    border: 1px solid #ACB4BE;
+    font-size: 12px;
+}
+.uEditor-dialog h3 {
+    padding: 0 0 0 18px;
+    height: 30px;
+    line-height: 30px;
+    background: #D6DBE2 url('img/titlebg.png') repeat-x 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ACB4BE;
+}
+.uEditor-upload {
+    z-index: 99;
+}
+.uEditor-upload h3,
+.uEditor-upload p {
+    margin: 0;
+}
+.uEditor-upload-content {
+    width: 500px;
+    background: #fff;
+}
+.uEditor-upload-content-body {
+    padding: 5px 30px 25px;
+}
+.uEditor-upload-content-body p {
+    padding: 5px 0;
+}
+.uEditor-upload-content-body p label {
+    margin-right: 15px;
+}
+.uEditor-upload-content-body p .uEditor-button {
+    margin-left: 62px;
+}
+.uEditor-tabs ul {
+    border-bottom: 1px solid #CED5E0;
+    margin-top: 15px;
+    padding-left: 10px;
+}
+.uEditor-tabs ul li {
+    float: left;
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    margin: 0 10px;
+    width: 120px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #F2F2F2;
+    border-color: #CED5E0;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    text-align: center;
+}
+.uEditor-tabs ul li.selected {
+    cursor: default;
+    background-color: #FCFCFC;
+    border-color: #CED5E0 #CED5E0 #FCFCFC;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+}
+.uEditor-input {
+    padding: 2px 5px;
+}
+.uEditor-color-panel a {
+    color: black;
+    display: block;
+    text-decoration: none;
+}
+.uEditor-color-panel a:hover {
+    color: black;
+    text-decoration: none;
+}
+.uEditor-color-panel a:active {
+    color: black;
+}
+.uEditor-color-palette {
+    margin: 5px 8px 8px;
+}
+.uEditor-color-palette table {
+    border: 1px solid #666666;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.uEditor-color-palette td {
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid #666666;
+    height: 18px;
+    width: 18px;
+}
+a.uEditor-color-a {
+    height: 18px;
+    width: 18px;
+}
+a.uEditor-color-a:hover {
+    border: 1px solid #FFFFFF;
+    height: 16px;
+    width: 16px;
+}
+a.uEditor-color-remove {
+    margin: 2px 0 3px;
+    padding: 3px 8px;
+    font-size: 12px;
+}
+a.uEditor-color-remove:hover {
+    background-color: #D6E9F8;
+}
+.uEditor-clear:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+}
+.uEditor-clear:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+}
+
+#uEditor-imageurl {
+    width: 300px;
+}
+#uEditor-imagealt {
+    width: 100px;
+}

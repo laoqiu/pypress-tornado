@@ -1,0 +1,32 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Edit") }}{% end %}
+{% block content %}
+<div>
+    {% from pypress.filters import field_errors %}
+    <form action="" method="POST">
+        {{ xsrf_form_html() }}
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label.text }}: 
+            {{ form.title }}
+            {{ field_errors(form.title) }}
+        </div>
+        <div>
+            {{ form.slug.label.text }}: 
+            {{ form.slug }}
+            {{ field_errors(form.slug) }}
+        </div>
+        <div>
+            {{ form.content.label.text }}: 
+            {{ form.content }}
+            {{ field_errors(form.content) }}
+        </div>
+        <div>
+            {{ form.tags.label.text }}: 
+            {{ form.tags }}
+            {{ field_errors(form.tags) }}
+        </div>
+        <div>{{ form.submit }} </div>
+    </form>
+</div>
+{% end %}

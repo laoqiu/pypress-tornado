@@ -1,0 +1,16 @@
+{% extends "../base.html" %}
+{% block title %}Search{% end %}
+{% block content %}
+<h1>search</h1>
+<div>
+    {% if page_obj.items %}
+        {% for post in page_obj.items %}
+        <div id="post-{{ post.id }}" class="post">
+            <a href="{{ reverse_url('post_view', post.id) }}">{{ post.title }}</a>
+        </div>
+        {% end %}
+    {% else %}
+        <div>No post</div>
+    {% end %}
+</div>
+{% end %}

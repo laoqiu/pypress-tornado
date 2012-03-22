@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Add comment") }}{% end %}
+{% block content %}
+<div class="content">
+    <h2 class="title"><a href="{{ reverse_url('fullview', post.created_date.year, post.created_date.month, post.created_date.day, post.slug.encode('utf8')) }}">{{ post.title }}</a></h2>
+    <div id="add_comment">
+    <form method="post" action=".">
+    {% from pypress.filters import field_errors %}
+        {{ xsrf_form_html() }}
+        <table cellspacing="0" class="form-table">
+        <tbody>
+        {% if current_user %}
+            {{ form.email(type='hidden',value=current_user.email) }}
+            {{ form.nickname(type='hidden',value=current_user.nickname) }}
+        {% else %}                    
+            <tr>
+                <th>{{ form.email.label }}</th>
+                <td>{{ form.email(size=50, class_="text") }} {{ render_errors(form.email) }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.nickname.label }}</th>
+                <td>{{ form.nickname(size=50, class_="text") }} {{ render_errors(form.nickname) }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.website.label }}</th>
+                <td>{{ form.website(size=50, class_="text") }} {{ render_errors(form.website) }}</td>
+            </tr>
+        {% end %}
+            <tr>
+                <th>{{ form.comment.label }}</th>
+                <td>{{ form.comment(class_="text", style="width:400px;height:100px;") }} {{ render_errors(form.comment) }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{{ form.submit(class_="button") }}</td>
+            </tr>
+        </tbody>
+        </table>
+    </form>
+    </div>
+</div>
+{% end %}

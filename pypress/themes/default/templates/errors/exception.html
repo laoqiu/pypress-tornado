@@ -1,0 +1,169 @@
+{% import sys %}
+{% import os %}
+{% import tornado %}
+{% import traceback %}
+{% set type, value, tback = sys.exc_info() %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Status {{ status_code }} &raquo; Tornado v{{ tornado.version }}</title>
+    <style type="text/css" media="screen">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Helvetica;
+        font-size: 10pt;
+    }
+
+    h1 {
+        padding: 20px;
+        color: #fff;
+        background: #133F52;
+    }
+
+    h2 {
+        background: #ffdd6f;
+        margin: 0;
+        margin-bottom: 1em;
+        padding: 5px;
+    }
+
+    h3 {
+        border-bottom: 1px solid #CCC;
+        margin: 0.5em 0;
+        padding-bottom: 0.5em;
+    }
+
+    hr {
+        background: #CCC;
+        border: none;
+        height: 1px;
+        margin: 0.25em 0;
+    }
+
+    #container {
+        padding: 20px;    
+    }
+
+    .traceback-frame-header td {
+        background: #EEFFFF;
+        padding: 5px;
+    }
+
+    .traceback-frame-header h4 {
+        cursor: pointer;
+        margin: 0;
+    }
+
+    .traceback-frame.first .traceback-frame-header td {
+        background: #ac9;
+    }
+
+    table td {
+        padding: 5px 10px;
+    }
+    
+    table td.key {
+        width: 15%;
+        background: #eee;
+    }
+    table td.value.alt {
+        background: #EFEFEF;
+    }
+
+    {{ css }}
+
+    </style>
+
+</head>
+<body>
+<div id="header">
+    <h1>HTTP Status {{ status_code }}</h1>
+</div>
+
+{% if exception %}
+    {% set traceback_list = traceback.extract_tb(tback) %}
+    {% set filepath, line, method, code = traceback_list[-1] %}
+
+    <div id="container">
+        <h2>Application raised {{ exception.__class__.__name__ }}: {{ exception }}</h2>
+        <table class="traceback-frame first">
+            <tr class="traceback-frame-header">
+                <td width="100%" nowrap>
+                    <h4>on line <span class="line-no">{{ line }}</span> of <span class="method">{{ method }}</span> in {{ os.path.basename(filepath) }}</h4>
+                </td>
+                <td nowrap>File: <strong>{{ filepath }}</strong></td>
+            </tr>
+            <tr class="traceback-frame-extended">
+                <td colspan="2">
+                    {% set extension = os.path.splitext(filepath)[1][1:] %}
+                    {% if extension in ['py', 'html', 'htm'] %}
+                        {{ get_snippet(filepath, line, 10) }}
+                    {% else %}
+                        <p>Cannot load file, type not supported.</p>
+                    {% end %}
+                </td>
+            </tr>
+        </table>
+
+        <h3>Full Traceback</h3>
+        <div id="full-traceback">
+            {% for filepath, line, method, code in traceback_list %}
+                <table class="traceback-frame">
+                    <tr class="traceback-frame-header">
+                        <td width="100%" nowrap>
+                            <h4>on line <span class="line-no">{{ line }}</span> of <span class="method">{{ method }}</span> in {{ os.path.basename(filepath) }}</h4>
+                        </td>
+                        <td nowrap>File: <strong>{{ filepath }}</strong></td>
+                    </tr>
+                    <tr class="traceback-frame-extended">
+                        <td colspan="2">
+                            {% set extension = os.path.splitext(filepath)[1][1:] %}
+                            {% if extension in ['py', 'html', 'htm'] %}
+                                {{ get_snippet(filepath, line, 10) }}
+                            {% else %}
+                                <p>Cannot load file, type not supported.</p>
+                            {% end %}
+                        </td>
+                    </tr>
+                </table>
+                <br />
+            {% end %}
+        </div>
+        
+        <h3>Request Headers</h3>
+        <div>
+            <table width="100%">
+                {% for hk, hv in handler.request.headers.iteritems() %}
+                    <tr>
+                        <td class="key" nowrap>{{ hk }}</td>
+                        <td class="value" width="100%">{{ hv }}</td>
+                    </tr>
+                {% end %}
+            </table>
+        </div>
+        
+        <h3>Response Headers</h3>
+        <div>
+            <table width="100%">
+                {% for hk, hv in handler._headers.iteritems() %}
+                    <tr>
+                        <td class="key" nowrap>{{ hk }}</td>
+                        <td class="value" width="100%">{{ hv }}</td>
+                    </tr>
+                {% end %}
+            </table>
+        </div>
+    </div>
+{% end %}
+
+<div id="footer">
+    Tornado v{{ tornado.version }}
+</div>
+    
+    
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div id="post-{{ post.id }}" class="post">
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <div class="post-meta">
+        <span class="post-author">author: <a href="{{ reverse_url('people', post.author.username) }}" title="author">{{ post.author.username }}</a></span>
+        <span class="post-at">at: {{ post.created_date }}</span>
+        <span class="post-tags">tags: {% for tag, url in post.linked_taglist %}<a href="{{ url }}" title="{{ tag }}">{{ tag }}</a> {% end %}</span>
+        <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
+    </div>
+    <div class="post-content">
+        {{ post.summary }}
+        {% if post.summary!=post.content %}<a href="{{ post.url }}" class="more">Read more...</a>{% end %}
+    </div>
+</div>

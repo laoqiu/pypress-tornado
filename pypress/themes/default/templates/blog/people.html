@@ -1,0 +1,14 @@
+{% extends "../base.html" %}
+{% block title %}{{ people.username }}{% end %}
+{% block content %}
+<h1>People: {{ people.username }}</h1>
+<div id="post-list">
+    {% if page_obj.items %}
+        {% for post in page_obj.items %}
+            {% module Post(post) %}
+        {% end %}
+    {% else %}
+        <div class="error-no-data">No post</div>
+    {% end %}
+</div>
+{% end %}

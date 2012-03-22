@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% end %} - Pypress by tornado</title>
+    <link rel="stylesheet" href="/static/base.css" />
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $("#go-to-top").click(function(){
+            $("html, body").animate({'scrollTop': 0}, 400);
+            return false;
+        });
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            var g = $("#go-to-top");
+            if (top > 300 && g.is(":hidden")) {
+                g.fadeIn();
+            } else if(top < 300 && g.is(":visible")) {
+                g.fadeOut();
+            }
+        });
+    })
+    </script>
+    {% block js %}{% end %}
+</head>
+<body>
+<div id="wrap">
+    {% set messages = handler.get_flashed_messages() %}
+    {% if messages %}
+    <div id="flashed">
+        {% for category, msg in messages %}
+        <span class="flash-{{ category }}">{{ msg }}</span>
+        {% end %}
+    </div>
+    {% end %}
+    <div id="header">
+        <div class="inner">
+            <h1>Pypress, 由python编写的团队博客</h1>
+            <div id="nav">
+                <ul>
+                    <li>
+                        <a href="/">{{ _("Home") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ reverse_url("tags") }}">{{ _("Tags") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ reverse_url("archives") }}">{{ _("Archives") }}</a>
+                    </li>
+                    <li>
+                    <a href="{{ reverse_url('post') }}">{{ _("Post Now") }}</a>
+                    </li>
+                    <li class="current_user">
+                        {% if current_user %}
+                            {{ current_user.username }}
+                            <small><a href="/logout">{{ _('logout') }}</a></small>
+                        {% else %}
+                            <small><a href="/login">{{ _('login') }}</a></small>
+                        {% end %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div class="inner">
+            <div class="content">
+            {% block content %}{% end %}
+            </div>
+            <div class="sidebar">
+            {% block sidebar %}{% end %}
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="inner">
+            <p class="info"><span>Copyright &copy; laoqiu Аll Rights Reserved. </span>Powered by PyPress. </p>
+        </div>
+    </div>
+</div>
+<a style="display:none;" rel="nofollow" href="#header" id="go-to-top">▲</a>
+</body>
+</html>
