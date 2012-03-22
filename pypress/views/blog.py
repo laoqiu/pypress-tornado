@@ -239,6 +239,8 @@ class Edit(RequestHandler):
     def get(self, post_id):
      
         post = Post.query.get_or_404(post_id)
+
+        post.permissions.edit.test(self.identity, 401)
     
         form = self.forms.PostForm(title = post.title,
                                    slug = post.slug,
@@ -253,6 +255,8 @@ class Edit(RequestHandler):
     def post(self, post_id):
         
         post = Post.query.get_or_404(post_id)
+        
+        post.permissions.edit.test(self.identity, 401)
 
         form = self.forms.PostForm(self.request.arguments, obj=post)
         
@@ -275,16 +279,14 @@ class Delete(RequestHandler):
     def get(self, post_id):
         
         post = Post.query.get_or_404(post_id)
-    
-        if post.permissions.delete(self.current_user):
-            
-            db.session.delete(post)
-            db.session.commit()
+        
+        post.permissions.delete.test(self.identity, 401)
 
-            self.redirect('/')
-            return 
-        else:
-            raise tornado.web.HTTPError(403)
+        db.session.delete(post)
+        db.session.commit()
+
+        self.redirect('/')
+        return 
 
 
 @route(r'/comment/(\d+)/delete', name='comment_delete')
