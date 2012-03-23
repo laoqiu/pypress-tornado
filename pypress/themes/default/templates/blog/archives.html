@@ -1,15 +1,23 @@
 {% extends "../base.html" %}
 {% block title %}Archives{% end %}
 {% block content %}
-<h1>Archives</h1>
+<h2>Archives</h2>
 <div class="archives">
+{% for index, post in enumerate(page_obj.items) %}
+    {% if index==0 %}
+    <h3><a href="{{ reverse_url('archive_year', post.created_date.year) }}" title="archives">{{ post.created_date.year }}</a></h3>
     <ul>
-    {% for post in page_obj.items %}
+    {% end %}
     <li>
-        <span>{{ post.created_date.strftime('%Y-%m-%d') }}</span>
+        <span>{{ locale.format_day(post.created_date) }}</span>
         <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
+    {% if post.prev_post and post.created_date.year != post.prev_post.created_date.year %}
+    </ul>
+    <h3><a href="{{ reverse_url('archive_year', post.prev_post.created_date.year) }}" title="archives">{{ post.prev_post.created_date.year }}</a></h3>
+    <ul>
     {% end %}
+{% end %}
     </ul>
 </div>
 {% end %}

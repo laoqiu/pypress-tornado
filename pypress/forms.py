@@ -57,9 +57,9 @@ def create_forms():
                                                equal_to("password", message=\
                                                         _("Passwords don't match"))])
 
-                email = TextField(_("Email address"), validators=[
-                                  required(message=_("Email address required")), 
-                                  email(message=_("A valid email address is required"))])
+                email = TextField(_("Email"), validators=[
+                                  required(message=_("Email required")), 
+                                  email(message=_("A valid email is required"))])
 
                 code = TextField(_("Signup Code"))
 
@@ -80,7 +80,7 @@ def create_forms():
 
             class RecoverPasswordForm(Form):
                 email = TextField(_("Your email address"), validators=[
-                                  email(message=_("A valid email address is required"))])
+                                  email(message=_("A valid email is required"))])
 
                 submit = SubmitField(_("Find password"))
 
@@ -140,7 +140,7 @@ def create_forms():
             class CommentForm(Form):
                 email = TextField(_("Email"), validators=[
                                   required(message=_("Email required")),
-                                  email(message=_("A valid email address is required"))])
+                                  email(message=_("A valid email is required"))])
                 
                 nickname = TextField(_("Nickname"), validators=[
                                   required(message=_("Nickname required"))])
@@ -161,7 +161,7 @@ def create_forms():
 
             class LinkForm(Form):
                 name = TextField(_("Site name"), validators=[
-                                  required(message=_("Name required"))])
+                                  required(message=_("Site name required"))])
                 
                 link = TextField(_("link"), validators=[
                                 url(message=_("A valid url is required"))])

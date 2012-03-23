@@ -115,7 +115,7 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
 
             css = HtmlFormatter().get_style_defs('.highlight')
             exception = kwargs.get('exception', None)
-            return self.render_string('errors/exception.html', 
+            return self.render_string('errors/exception.htm', 
                                       get_snippet=get_snippet,
                                       css=css,
                                       exception=exception,

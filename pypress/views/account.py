@@ -109,13 +109,14 @@ class Signup(RequestHandler):
         return
 
 
-@route(r'/lang', name='language')
+@route(r'/i18n', name='language')
 class Language(RequestHandler):
     def get(self):
         code = self.get_args('lang','en_US')
         self.set_cookie('lang', code)
-    
-        self.redirect('/login')
+        
+        next_url = self.get_args('next','/')
+        self.redirect(next_url)
         return
 
 

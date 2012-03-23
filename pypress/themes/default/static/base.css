@@ -4,7 +4,7 @@ html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
 }
 
 body {
-    font: 0.75em/1.5em 'Georgia',Verdana,Arial,sans-serif;
+    font: 0.75em/1.5em 'Georgia','Verdana','Arial',sans-serif;
     color: #333;
     background: #fff;
 }
@@ -286,6 +286,14 @@ blockquote {
 .post-content p {
     margin: 10px auto;
 }
+.post-content pre {
+    display: block;
+    padding: 15px;
+    border-color: #B3B3B3 #B3B3B3 #B3B3B3 #DDDDDD;
+    border-style: dotted dotted dotted solid;
+    border-width: 1px 1px 1px 5px;
+    background: #fff;
+}
 
 .post-meta {
     padding: 5px 0;
@@ -383,9 +391,21 @@ a.tag-8 { color:#000; font-size: 1.8em; font-weight: 800; }
 a.tag-9 { color:#06c; font-size: 2em; font-weight: 900; }
 a.tag-10 { color:#c60; font-size: 2em; font-weight: 900; }
 
+.archives h3 {
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.8em;
+    line-height: 2em;
+    font-weight: normal;
+}
 .archives ul li {
+    list-style-type: square;
     line-height: 1.8em;
     font-size: 13px;
+}
+.archives ul li span {
+    float: right;
+    color: #999;
 }
 
 /***** footer *****/

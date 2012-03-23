@@ -17,8 +17,8 @@ from pygments.formatters import HtmlFormatter
 
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
-_pre_re = re.compile(r'<pre (?=l=[\'"]?\w+[\'"]?).*?>(?P<code>[\w\W]+?)</pre>')
-_lang_re = re.compile(r'l=[\'"]?(?P<lang>\w+)[\'"]?')
+_pre_re = re.compile(r'<pre (?=lang=[\'"]?\w+[\'"]?).*?>(?P<code>[\w\W]+?)</pre>')
+_lang_re = re.compile(r'lang=[\'"]?(?P<lang>\w+)[\'"]?')
 
 
 class Storage(dict):

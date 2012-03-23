@@ -1,5 +1,5 @@
+div.highlight  { margin: 0px; overflow: auto; width: 100%; }
 div.highlight .hll { background-color: #ffffcc }
-div.highlight  { border: 1px solid #c6c6c6; margin: 0px; padding: 2px 10px; overflow: auto; width: 100%; background: #f2f2f2; }
 div.highlight .c { color: #8f5902; font-style: italic } /* Comment */
 div.highlight .err { color: #a40000; border: 1px solid #ef2929 } /* Error */
 div.highlight .g { color: #000000 } /* Generic */

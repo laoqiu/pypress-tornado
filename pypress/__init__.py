@@ -37,7 +37,7 @@ class Application(tornado.web.Application):
             static_path = os.path.join(settings['theme_path'], settings['theme_name'], 'static'),
         ))
         
-        if hasattr(settings, 'default_locale'):
+        if 'default_locale' in settings:
             tornado.locale.load_gettext_translations(
                 os.path.join(os.path.dirname(__file__), 'translations'), 'messages')
 

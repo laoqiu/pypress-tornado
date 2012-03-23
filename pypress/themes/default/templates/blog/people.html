@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/static/highlight.css" />
 {% end %}
 {% block content %}
-<h1>People: {{ people.username }}</h1>
+<h2>People: {{ people.username }}</h2>
 <div id="post-list">
     {% if page_obj.items %}
         {% for post in page_obj.items %}

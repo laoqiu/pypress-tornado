@@ -56,3 +56,10 @@ p {
     line-height: 1.6em;
 }
 
+pre {
+    display: block;
+    padding: 15px;
+    border-color: #B3B3B3 #B3B3B3 #B3B3B3 #DDDDDD;
+    border-style: dotted dotted dotted solid;
+    border-width: 1px 1px 1px 5px;
+}

@@ -570,7 +570,6 @@
                             self.insertNewParagraph(removedElements, this);
                             removedElements = new Array();
                         }
-
                     });
 
                     if (removedElements.length > 0)
@@ -587,7 +586,10 @@
                     /* Switch to HTML source */
                     if (this.wysiwyg) {
                         this.updateuEditorInput();
-                        $(this.textarea).val($(this.input).val());
+                        html = $(this.input).val();
+                        // add \r\n
+                        html = html.replace(/<\/([^>]*)>/g, '</\$1>\r\n');
+                        $(this.textarea).val(html);
                         $(this.iframe).replaceWith(this.textarea);
                         this.toolbar.disable();
                         this.wysiwyg = false;
@@ -1202,6 +1204,19 @@
                     $(editor.iframe).appendToSelection('hr', {
                     }, null, true);
                 }
+            },
+            code : {
+                className : 'uEditorButtonCode',
+                action : function(){
+                    var editor = $.data(this, 'editor');
+                    if(!editor.wysiwyg) return;
+                    var lang = prompt(editor.settings.translation.CodeLang, "html");
+                    if (lang != null) {
+                        $(editor.iframe).appendToSelection('pre', {
+                            'lang' : lang
+                        }, 'Your code here...', false);
+                    }
+                }
             }
         });
     };
@@ -1280,6 +1295,7 @@
                 p : "普通文本",
                 //selectTextToHyperlink : "Please select the text you wish to hyperlink.",
                 linkURL : "链接地址",
+                CodeLang: "代码语言",
                 imageLocal : "本地图片",
                 imageRemote : "网络图片",
                 imageURL : "图片地址",
@@ -1332,6 +1348,7 @@
                 'alt',
                 'src',
                 'style',
+                'lang',
                 'width',
                 'height'
             ];
@@ -1339,7 +1356,7 @@
             settings = $.extend({
                 insertParagraphs : true,
                 stylesheet : 'uEditorContent.css',
-                toolbarItems : ['bold','italic','underline','strikethrough','color','bgcolor','orderedlist','unorderedlist','justifyleft','justifycenter','justifyright','indent','outdent','link','image','pagebreaks','htmlsource','formatblock'],
+                toolbarItems : ['bold','italic','underline','strikethrough','color','bgcolor','orderedlist','unorderedlist','justifyleft','justifycenter','justifyright','indent','outdent','link','image','code','pagebreaks','htmlsource','formatblock'],
                 selectBlockOptions : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'],
                 undesiredTags : defaultUndesiredTags,
                 //allowedClasses : new Array(),
