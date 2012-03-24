@@ -6,7 +6,7 @@ html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
 
 body {
     padding: 10px;
-    font: 0.75em/1.5em 'Georgia',Verdana,Arial,sans-serif;
+    font: 1em/1.6em 'Georgia',Verdana,Arial,sans-serif;
     color: #333;
     background: #fff;
 }
@@ -59,6 +59,7 @@ p {
 pre {
     display: block;
     padding: 15px;
+    font-size: 0.75em;
     border-color: #B3B3B3 #B3B3B3 #B3B3B3 #DDDDDD;
     border-style: dotted dotted dotted solid;
     border-width: 1px 1px 1px 5px;
