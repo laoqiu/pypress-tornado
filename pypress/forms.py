@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 #coding=utf-8
-import logging
 import tornado.locale
 
 from pypress.extensions.forms import Form, TextField, PasswordField, SubmitField, \
         TextAreaField, BooleanField, HiddenField, ValidationError, \
-        validators, required, regexp, equal_to, email, optional, url
+        required, regexp, equal_to, email, optional, url
 
 from pypress.models import User, Post
 from pypress.helpers import slugify
@@ -121,17 +120,13 @@ def create_forms():
 
                 next = HiddenField()
 
-                def __init__(self, *args, **kwargs):
-                    self.post = kwargs.get('obj', None)
-                    super(FormWrapper.PostForm, self).__init__(*args, **kwargs)
-
                 def validate_slug(self, field):
                     if len(field.data) > 50:
                         raise ValidationError, _("Slug must be less than 50 characters")
                     slug = slugify(field.data) if field.data else slugify(self.title.data)[:50]
                     posts = Post.query.filter_by(slug=slug)
-                    if self.post:
-                        posts = posts.filter(db.not_(Post.id==self.post.id))
+                    if self.obj:
+                        posts = posts.filter(db.not_(Post.id==self.obj.id))
                     if posts.count():
                         error = _("This slug is taken") if field.data else _("Slug is required")
                         raise ValidationError, error

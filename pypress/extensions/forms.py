@@ -53,6 +53,7 @@ class Form(BaseForm):
     """
 
     def __init__(self, formdata=None, *args, **kwargs):
+        self.obj = kwargs.get('obj', None)
         super(Form, self).__init__(formdata, *args, **kwargs)
     
     def process(self, formdata=None, *args, **kwargs):
