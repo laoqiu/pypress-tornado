@@ -1,4 +1,4 @@
-html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
+html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,ul,li {
     margin: 0;
     padding: 0;
 }
@@ -6,7 +6,7 @@ html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
 body {
     font: 0.75em/1.5em 'Georgia','Verdana','Arial',sans-serif;
     color: #333;
-    background: #fff;
+    background: #ececec url('bg.gif') repeat 0 0;    
 }
 
 /***** public class settings ****/
@@ -16,11 +16,11 @@ h1 {
     line-height: 2em;
 }
 h2 {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 2em;
 }
 h3 {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.6em;
 }
 h4,h5,h6 {
@@ -37,7 +37,7 @@ a:link, a:visited {
     text-decoration: none;
 }
 a:hover {
-    color: #666;
+    color: #2f80d2;
 }
 
 a img {
@@ -108,49 +108,69 @@ blockquote {
 }
 
 #header {
-    height: 60px;
-    color: #eee;
-    background: #546f8c;   
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
 }
-#header h1 {
-    padding-top: 10px;
-}
-
-#header .inner, #container .inner, #footer .inner {
-    margin: auto;
-    width: 960px;
-}
-
 #header .inner {
-    position: relative;
+    padding: 20px 0 20px 40px;
+}
+#header .desc {
+    margin-bottom: 20px;
+    color: #666;
 }
 
-#nav {
+#menu {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 500px;
-    font-size: 1.2em;
+    right: 40px;
+    top: 20px;
 }
+
 
 #nav li {
-    display: block;
-    float: left;
-    padding: 0 10px;
+    list-style: none;
+    line-height: 1.8em;
 }
-#nav li a {
-    color: #fff;
-}
-
-#nav li.current_user {
-    float: right;
-}
-
-
 
 #container {
-    padding: 32px 0;
-    background: #ececec url('bg.gif') repeat 0 0;    
+    padding: 2em;
+    margin-left: 200px;
+    min-width: 820px;
+}
+.content {
+    float: left;
+    padding: 10px 0;
+    width: 600px;
+}
+.content h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: black;
+}
+.sidebar {
+    float: left;
+    padding: 40px 0 0 40px;
+    width: 180px;
+}
+.sidebar-module {
+    margin-bottom: 20px;
+}
+.sidebar-module h3 {
+    padding: 10px 0;
+}
+.sidebar-module ul li {
+    list-style: none;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+#search input.text {
+    padding: 2px;
+    width: 160px;
+    border: 1px solid #ccc;
+    background: #fff url('find.png') no-repeat right 50%;
 }
 
 #post-form input.text {
@@ -163,16 +183,6 @@ blockquote {
 }
 
 /***** form *****/
-.form {
-    padding: 24px 36px;
-    background: #fff;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow:0 0 5px #ccc;
-    -moz-box-shadow:0 0 5px #ccc;
-}
 .form h2 {
     margin-bottom: 12px;
 }
@@ -181,8 +191,7 @@ blockquote {
     padding: 5px 0;
 }
 .form-field label {
-    float: left;
-    width: 120px;
+    display: block;
 }
 .form-field .text {
     padding: 2px;
@@ -207,7 +216,7 @@ blockquote {
 }
 
 .form-section {
-    margin: 10px 0;
+    margin:210px 0;
 }
 
 .form-section label {
@@ -235,18 +244,6 @@ blockquote {
     line-height: 16px;
 }
 
-#login-box .form-box, #signup-box .form-box {
-    float: left;
-    width: 500px;
-    border-right: 1px solid #ddd;
-}
-
-#login-box .form-side, #signup-box .form-side {
-    float: left;
-    padding-left: 32px;
-    width: 350px;
-}
-
 #login-box .form-button,
 #signup-box .form-button {
     background-color: #4D90FE;
@@ -255,19 +252,15 @@ blockquote {
 .form .form-button,
 .form .errors {
     margin-left: 120px;
-}
+div}
 
 .post {
-    padding: 10px 0;
-    background: url("post-line.png") repeat-x 0 bottom;    
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
 }
-
-.post a:link, .post a:visited {
-    color: #597A9C;
-    text-decoration: none;
-}
-.post a:hover {
-    text-decoration: underline;
+.post h2 {
+    margin-bottom: 0;
+    font-size: 13px;
 }
 
 .post-avatar a {
@@ -277,7 +270,7 @@ blockquote {
 .post-content {
     margin-bottom: 10px;
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.6em;
 }
 .post-content hr {
@@ -304,6 +297,14 @@ blockquote {
     margin-right: 10px;
     text-transform: capitalize;
 }
+.post-meta a:link, 
+.post-meta a:visited {
+    color: #666;
+}
+.post-meta a:hover {
+    color: #555;
+}
+
 .post-foot {
     margin-bottom: 10px;
     padding: 5px 10px;
@@ -373,6 +374,9 @@ blockquote {
     margin: 0 0 0 72px;
 }
 
+#tag-cloud {
+    padding: 20px 0;
+}
 #tag-cloud ul {
     padding: 0;
 }
@@ -399,10 +403,20 @@ a.tag-10 { color:#c60; font-size: 2em; font-weight: 900; }
     line-height: 2em;
     font-weight: normal;
 }
+.archives h3 a:link,
+.archives h3 a:visited {
+    color: #555;
+}
+.archives h3 a:hover {
+    color: #999;
+}
+
+.archives ul {
+    margin-left: 20px;
+}
 .archives ul li {
     list-style-type: square;
-    line-height: 1.8em;
-    font-size: 13px;
+    line-height: 2em;
 }
 .archives ul li span {
     float: right;
@@ -411,16 +425,9 @@ a.tag-10 { color:#c60; font-size: 2em; font-weight: 900; }
 
 /***** footer *****/
 #footer {
-    padding: 10px;
+    padding: 10px 40px 20px;
     color: #999;
-    background: #fff;
-    border-top: 1px solid #ddd;
-}
-
-#footer p span {
-    float: right;
-}
-div.uEditor {
-    width: 650px;
+    text-align: right;
+    font-size: 11px;
 }
 

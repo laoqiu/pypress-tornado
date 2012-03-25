@@ -1,10 +1,10 @@
 {% extends "../base.html" %}
 {% block title %}{{ post.title }}{% end %}
 {% block css %}
-<link rel="stylesheet" href="{{ reverse_url('theme_path', 'default/static/highlight.css') }}" />
+<link rel="stylesheet" href="{{ reverse_url('theme_path', 'simple/static/highlight.css') }}" />
 {% end %}
 {% block js %}
-<script type="text/javascript" src="{{ reverse_url('theme_path', 'default/static/blog.js') }}"></script>
+<script type="text/javascript" src="{{ reverse_url('theme_path', 'simple/static/blog.js') }}"></script>
 <script type="text/javascript">
 $(function(){
     get_captcha('{{ reverse_url('get_captcha') }}');
@@ -12,10 +12,10 @@ $(function(){
 </script>
 {% end %}
 {% block content %}
-<h1>{{ post.title }}</h1>
+<h2>{{ post.title }}</h2>
 <div class="post-meta">
     <span class="post-author">author: <a href="{{ reverse_url('people', post.author.username) }}" title="author">{{ post.author.username }}</a></span>
-    <span class="post-at">at: {{ post.created_date }}</span>
+    <span class="post-at">at: {{ locale.format_day(post.created_date, dow=False) }}</span>
     <span class="post-tags">tags: {% for tag, url in post.linked_taglist %}<a href="{{ url }}" title="{{ tag }}">{{ tag }}</a> {% end %}</span>
     <span class="post-comments">{% if post.num_comments %}<a href="{{ post.url }}#comments" title="comments">{{ post.num_comments }} comments</a>{% else %}no comments{% end %}</span>
     {% if post.permissions.edit.can(handler.identity) %}

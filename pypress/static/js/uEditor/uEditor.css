@@ -1,6 +1,6 @@
 .uEditor {
     float: left;
-    width: 650px;
+    width: 100%;
     height: auto;
     padding: 0;
     margin: 10px 0;
@@ -106,11 +106,13 @@
 .uEditor ul.uEditorToolbar li a.uEditorButtonPagebreaks {
     background-image: url('img/pagebreaks.png');
 }
+.uEditor ul.uEditorToolbar li a.uEditorButtonCode {
+    background-image: url('img/code.png');
+}
 .uEditor ul.uEditorToolbar li a.myButtonClass,
 .uEditor ul.uEditorToolbar li a.mySecondButtonClass {
     background: url(img/plugin.png);
 }
-
 .uEditor ul.uEditorToolbar li.uEditorEditSelect {
     margin:0;
     padding:0;

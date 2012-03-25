@@ -92,7 +92,7 @@ class Search(RequestHandler):
             
         page_url = lambda page: self.reverse_url('search') + \
                                 '?%s' % urllib.urlencode(dict(page=page,
-                                                              keywords=keywords))
+                                                              q=keywords))
                                                         
         self.render("blog/search.html", 
                     page_obj=page_obj,

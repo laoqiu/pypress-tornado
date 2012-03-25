@@ -1,0 +1,53 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Signup") }}{% end %}
+{% block content %}
+<div id="signup-box" class="form">
+    <div class="form-box">
+        <h2>{{ _("Signup") }}</h2>
+        {% from pypress.filters import field_errors %}
+        <form action="" method="POST">
+            {{ xsrf_form_html() }}
+            {{ form.hidden_tag() }}
+            <div class="form-field">
+                {{ form.username.label() }} 
+                {{ form.username(class_="text") }}
+                {{ field_errors(form.username) }}
+            </div>
+            <div class="form-field">
+                {{ form.nickname.label() }} 
+                {{ form.nickname(class_="text") }}
+                {{ field_errors(form.nickname) }}
+            </div>
+            <div class="form-field">
+                {{ form.password.label() }} 
+                {{ form.password(class_="text") }}
+                {{ field_errors(form.password) }}
+            </div>
+            <div class="form-field">
+                {{ form.password_again.label() }} 
+                {{ form.password_again(class_="text") }}
+                {{ field_errors(form.password_again) }}
+            </div>
+            <div class="form-field">
+                {{ form.email.label() }} 
+                {{ form.email(class_="text") }}
+                {{ field_errors(form.email) }}
+            </div>
+            <div class="form-field">
+                {{ form.code.label() }} 
+                {{ form.code(class_="text") }}
+                {{ field_errors(form.code) }}
+            </div>
+            <div class="form-field">{{ form.submit(class_="form-button") }} </div>
+        </form>
+    </div>
+    <div class="form-side">
+        <h2>{{ _("As a Poster, you can...") }}</h2>
+        <p>....</p>
+        <p>
+            <a href="{{ reverse_url('login') }}" class="login">{{ _("Login") }}</a>
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>
+{% end %}

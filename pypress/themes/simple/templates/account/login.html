@@ -1,0 +1,33 @@
+﻿{% extends "../base.html" %}
+{% block title %}{{ _("Login") }}{% end %}
+{% block content %}
+<div id="login-box" class="form">
+    <div class="form-box">
+        <h2>{{ _("Login") }}</h2>
+        {% from pypress.filters import field_errors %}
+        <form action="" method="POST">
+            {{ xsrf_form_html() }}
+            <div class="form-field">
+                {{ form.login.label() }} 
+                {{ form.login(class_="text") }}
+                {{ field_errors(form.login) }}
+            </div>
+            <div class="form-field">
+                {{ form.password.label() }}
+                {{ form.password(class_="text") }}
+            </div>
+            <div class="form-field">
+                {{ form.submit(class_="form-button") }}
+                {{ field_errors(form.submit) }}
+            </div>
+        </form>
+    </div>
+    <div class="form-side">
+        <h2>{{ _("Not a member?") }}</h2>
+        <p>
+            <a href="{{ reverse_url('signup') }}" class="signup">{{ _("Sign up Now!") }}</a>
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>
+{% end %}

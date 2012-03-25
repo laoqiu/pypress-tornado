@@ -1,0 +1,12 @@
+{% extends "../base.html" %}
+{% block title %}Tags{% end %}
+{% block content %}
+<h2>Tags</h2>
+<div id="tag-cloud">
+    <ul>
+    {% for tag in tags %}
+    <li><a href="{{ tag.url }}" class="tag-{{ tag.size>10 and 10 or tag.size }}">{{ tag.name }}</a></li>
+    {% end %}
+    </ul>
+</div>
+{% end %}

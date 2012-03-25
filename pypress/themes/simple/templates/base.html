@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% end %} - Pypress by tornado</title>
-    <link rel="stylesheet" href="{{ reverse_url('theme_path','default/static/base.css') }}" />
+    <link rel="stylesheet" href="{{ reverse_url('theme_path','simple/static/base.css') }}" />
     {% block css %}{% end %}
     <script type="text/javascript" src="{{ static_url('js/jquery.min.js') }}"></script>
     <script type="text/javascript">
@@ -37,7 +37,8 @@
     {% end %}
     <div id="header">
         <div class="inner">
-            <h1>Pypress, 由python编写的团队博客</h1>
+            <h1>Pypress</h1>
+            <p class="desc">由python编写的团队博客</p>
             <div id="nav">
                 <ul>
                     <li>
@@ -52,25 +53,41 @@
                     <li>
                     <a href="{{ reverse_url('post') }}">{{ _("Post Now") }}</a>
                     </li>
-                    <li class="current_user">
-                        {% if current_user %}
-                            {{ current_user.username }}
-                            <small><a href="/logout">{{ _("logout") }}</a></small>
-                        {% else %}
-                            <small><a href="/login">{{ _("login") }}</a></small>
-                        {% end %}
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
+    <div id="menu">
+    {% if current_user %}
+        {{ current_user.username }}
+        <small><a href="/logout">{{ _("logout") }}</a></small>
+    {% else %}
+        <small><a href="/login">{{ _("login") }}</a></small>
+    {% end %}
+    </div>
     <div id="container">
-        <div class="inner">
+        <div class="inner clearfix">
             <div class="content">
             {% block content %}{% end %}
             </div>
             <div class="sidebar">
-            {% block sidebar %}{% end %}
+                {% block sidebar %}
+                <div id="search" class="sidebar-module">
+                    <form action="{{ reverse_url('search') }}">
+                        <input name="q" type="text" class="text" />
+                    </form>
+                </div>
+                <div class="sidebar-module">
+                    <h3>{{ _("Latest comments") }}</h3>
+                    <ul>
+                        {% for comment in handler.get_cached_items('latest_comments') %}
+                        <li>
+                        {{ comment.comment }} <a href="{{ comment.url }}">#{{ comment.author.nickname }} {{ locale.format_day(comment.created_date, dow=False) }}</a>
+                        </li>
+                        {% end %}
+                    </ul>
+                </div>
+                {% end %}
             </div>
         </div>
     </div>

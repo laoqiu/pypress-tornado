@@ -1,16 +1,18 @@
 {% extends "../base.html" %}
-{% block title %}Search{% end %}
+{% block title %}{{ _('Search') }}{% end %}
+{% block css %}
+<link rel="stylesheet" href="{{ reverse_url('theme_path', 'default/static/highlight.css') }}" />
+{% end %}
 {% block content %}
-<h1>search</h1>
-<div>
+<h2>search by {{ keywords }}</h2>
+<div id="post-list">
     {% if page_obj.items %}
         {% for post in page_obj.items %}
-        <div id="post-{{ post.id }}" class="post">
-            <a href="{{ reverse_url('post_view', post.id) }}">{{ post.title }}</a>
-        </div>
+            {% module Post(post) %}
         {% end %}
     {% else %}
-        <div>No post</div>
+        <div class="error-no-data">No post</div>
     {% end %}
 </div>
 {% end %}
+

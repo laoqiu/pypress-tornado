@@ -7,10 +7,11 @@ COOKIE_SECRET = 'simple'
 LOGIN_URL = '/login'
 XSRF_COOKIES = True
 
-#TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates')
+TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates')
+STATIC_PATH = os.path.join(os.path.dirname(__file__), 'static')
 
 THEME_PATH = os.path.join(os.path.dirname(__file__), 'themes')
-THEME_NAME = 'default'
+THEME_NAME = 'simple'
 
 UPLOAD_PATH = os.path.join(os.path.dirname(__file__), 'uploads')
 

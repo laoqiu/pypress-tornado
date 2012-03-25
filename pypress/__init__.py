@@ -10,6 +10,8 @@ import os
 import tornado.web
 import tornado.locale
 
+from tornado.web import url
+
 from pypress import settings as config
 from pypress import uimodules
 from pypress.helpers import setting_from_object
@@ -21,10 +23,10 @@ from pypress.extensions.routing import Route
 class Application(tornado.web.Application):
     def __init__(self):
         settings = setting_from_object(config)
-        
         handlers = [
             # other handlers...
-            (r"/upload/(.+)", tornado.web.StaticFileHandler, dict(path=settings['upload_path']))
+            url(r"/theme/(.+)", tornado.web.StaticFileHandler, dict(path=settings['theme_path']), name='theme_path'),
+            url(r"/upload/(.+)", tornado.web.StaticFileHandler, dict(path=settings['upload_path']), name='upload_path')
         ] + Route.routes()
         
         # Custom 404 ErrorHandler
@@ -32,9 +34,7 @@ class Application(tornado.web.Application):
         
         settings.update(dict(
             ui_modules = uimodules,
-            autoescape = None,
-            template_path = os.path.join(settings['theme_path'], settings['theme_name'], 'templates'),
-            static_path = os.path.join(settings['theme_path'], settings['theme_name'], 'static'),
+            autoescape = None
         ))
         
         if 'default_locale' in settings:

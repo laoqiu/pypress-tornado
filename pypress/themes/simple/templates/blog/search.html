@@ -1,10 +1,10 @@
 {% extends "../base.html" %}
-{% block title %}{{ people.username }}{% end %}
+{% block title %}{{ _('Search') }}{% end %}
 {% block css %}
-<link rel="stylesheet" href="{{ reverse_url('theme_path', 'default/static/highlight.css') }}" />
+<link rel="stylesheet" href="{{ reverse_url('theme_path', 'simple/static/highlight.css') }}" />
 {% end %}
 {% block content %}
-<h2>People: {{ people.username }}</h2>
+<h2>search by {{ keywords }}</h2>
 <div id="post-list">
     {% if page_obj.items %}
         {% for post in page_obj.items %}

@@ -19,7 +19,9 @@ from pygments.lexers import get_lexer_for_filename
 from pygments.formatters import HtmlFormatter
 
 from pypress.database import db
+from pypress.models import Comment
 from pypress.extensions.permission import Identity, AnonymousIdentity
+from pypress.extensions.cache import cache
 
 
 class FlashMessageMixIn(object):
@@ -90,6 +92,11 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
         code = self.get_cookie('lang', self.settings.get('default_locale', 'zh_CN'))
         return tornado.locale.get(code)
     
+    def get_template_path(self):
+        if 'theme_path' in self.settings:
+            return os.path.join(self.settings['theme_path'], self.settings.get('theme_name', 'default'), 'templates')
+        return self.settings.get('template_path')
+    
     def get_error_html(self, status_code, **kwargs):
         if self.settings.get('debug', False) is False:
             self.set_status(status_code)
@@ -149,6 +156,20 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
 
     def _(self, message, plural_message=None, count=None):
         return self.locale.translate(message, plural_message, count)
+
+    def get_cached_items(self, name):
+        items = cache.get(name)
+        if items is None:
+            items = self.set_cached_items(name)
+        return items
+
+    def set_cached_items(self, name, limit=10):
+        items = []
+        if name == 'latest_comments':
+            items = [comment.item for comment in Comment.query.order_by(Comment.created_date.desc()).limit(limit)]
+            cache.set(name, items)
+        return items
+
  
          
 class ErrorHandler(RequestHandler):

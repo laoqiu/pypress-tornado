@@ -416,7 +416,19 @@ class Comment(db.Model):
     @cached_property
     def markdown(self):
         return markdown(self.comment or '')
-
+    
+    @cached_property
+    def json(self):
+        return dict(id=self.id,
+                    author=self.author,
+                    url=self.url,
+                    comment=self.comment,
+                    created_date=self.created_date)
+    
+    @cached_property
+    def item(self):
+        return storage(self.json)
+   
    
 class Link(db.Model):
 
