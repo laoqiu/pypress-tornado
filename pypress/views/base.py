@@ -171,7 +171,6 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
         return items
 
  
-         
 class ErrorHandler(RequestHandler):
     """raise 404 error if url is not found.
     fixed tornado.web.RequestHandler HTTPError bug.

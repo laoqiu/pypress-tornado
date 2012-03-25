@@ -247,6 +247,13 @@ blockquote {
     background-color: #4D90FE;
 }
 
+#post-view h2 {
+    margin-bottom: 0;
+}
+#post-list {
+    padding: 5px 0;
+}
+
 .post {
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
@@ -254,10 +261,6 @@ blockquote {
 .post h2 {
     margin-bottom: 0;
     font-size: 13px;
-}
-
-.post-view h2 {
-    margin-bottom: 0;
 }
 
 .post-avatar a {
@@ -397,7 +400,7 @@ a.tag-10 { color:#c60; font-size: 2em; font-weight: 900; }
 .archives h3 {
     margin: 10px 0;
     border-bottom: 1px solid #ccc;
-    font-size: 1.8em;
+    font-size: 1.5em;
     line-height: 2em;
     font-weight: normal;
 }
