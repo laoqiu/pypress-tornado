@@ -79,13 +79,18 @@
                 </div>
                 <div class="sidebar-module">
                     <h3>{{ _("Latest comments") }}</h3>
+                    {% set comments = handler.get_cached_items('latest_comments') %}
+                    {% if comments %}
                     <ul>
-                        {% for comment in handler.get_cached_items('latest_comments') %}
+                        {% for comment in comments %}
                         <li>
                         {{ comment.comment }} <a href="{{ comment.url }}">#{{ comment.author.nickname }} {{ locale.format_day(comment.created_date, dow=False) }}</a>
                         </li>
                         {% end %}
                     </ul>
+                    {% else %}
+                    <div class="error-no-data">{{ _('No comments have been posted yet.') }}</div>
+                    {% end %}
                 </div>
                 {% end %}
             </div>

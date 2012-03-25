@@ -317,7 +317,8 @@ blockquote {
 .post-foot .next {
     float: right;
 }
-.comment-add h3 {
+.comment-add h3,
+.comment-list h3 {
     padding: 10px 0;
 }
 .comment-add p {

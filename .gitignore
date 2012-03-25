@@ -6,5 +6,5 @@
 *.sql
 *.pid
 *.db
-*.swp
+*.sw[po]
 local*
