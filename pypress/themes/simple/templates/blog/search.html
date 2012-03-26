@@ -5,13 +5,5 @@
 {% end %}
 {% block content %}
 <h2>search by {{ keywords }}</h2>
-<div id="post-list">
-    {% if page_obj.items %}
-        {% for post in page_obj.items %}
-            {% module Post(post) %}
-        {% end %}
-    {% else %}
-        <div class="error-no-data">No post</div>
-    {% end %}
-</div>
+{% module List(page_obj, page_url) %}
 {% end %}

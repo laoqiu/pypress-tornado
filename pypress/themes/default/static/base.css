@@ -1,4 +1,4 @@
-html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,li {
+html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,ol,ul,li {
     margin: 0;
     padding: 0;
 }
@@ -294,6 +294,9 @@ blockquote {
     border-width: 1px 1px 1px 5px;
     background: #fff;
     font-size: 0.9em;
+}
+.post-content ol, .post-content ul {
+    margin: 20px 30px;
 }
 
 .post-meta {

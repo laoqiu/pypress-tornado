@@ -19,7 +19,7 @@ from pygments.lexers import get_lexer_for_filename
 from pygments.formatters import HtmlFormatter
 
 from pypress.database import db
-from pypress.models import Comment
+from pypress.models import Comment, Tag, Link
 from pypress.extensions.permission import Identity, AnonymousIdentity
 from pypress.extensions.cache import cache
 
@@ -76,7 +76,26 @@ class PermissionMixIn(object):
         return AnonymousIdentity()
 
 
-class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMixIn):
+class CachedItemsMixIn(object):
+    def get_cached_items(self, name):
+        items = cache.get(name)
+        if items is None:
+            items = self.set_cached_items(name)
+        return items
+
+    def set_cached_items(self, name, limit=10):
+        items = []
+        if name == 'latest_comments':
+            items = [comment.item for comment in Comment.query.order_by(Comment.created_date.desc()).limit(limit)]
+        elif name == 'tags':
+            items = Tag.query.cloud()
+        elif name == 'links':
+            items = [link.item for link in Link.query.limit(limit)]
+        cache.set(name, items)
+        return items
+
+
+class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMixIn, CachedItemsMixIn):
     def on_finish(self):
         """sqlalchemy connection close. 
         fixed sqlalchemy error: 'Can't reconnect until invalid'. new in version 2.2"""
@@ -156,19 +175,6 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
 
     def _(self, message, plural_message=None, count=None):
         return self.locale.translate(message, plural_message, count)
-
-    def get_cached_items(self, name):
-        items = cache.get(name)
-        if items is None:
-            items = self.set_cached_items(name)
-        return items
-
-    def set_cached_items(self, name, limit=10):
-        items = []
-        if name == 'latest_comments':
-            items = [comment.item for comment in Comment.query.order_by(Comment.created_date.desc()).limit(limit)]
-            cache.set(name, items)
-        return items
 
  
 class ErrorHandler(RequestHandler):

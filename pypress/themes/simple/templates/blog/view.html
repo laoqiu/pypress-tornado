@@ -12,7 +12,7 @@ $(function(){
 </script>
 {% end %}
 {% block content %}
-<div class="post-view">
+<div id="post-view">
     <h2>{{ post.title }}</h2>
     <div class="post-meta">
         <span class="post-author">author: <a href="{{ reverse_url('people', post.author.username) }}" title="author">{{ post.author.username }}</a></span>

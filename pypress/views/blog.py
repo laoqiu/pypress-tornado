@@ -111,7 +111,7 @@ class TagWall(RequestHandler):
         return
 
 
-@route(r'/tags/(.+)', name='tag')
+@route(r'/tag/(.+)', name='tag')
 class TagView(RequestHandler):
     def get(self, slug):
         
@@ -125,9 +125,10 @@ class TagView(RequestHandler):
         page_url = lambda page: self.reverse_url('tag', slug) + \
                                 '?%s' % urllib.urlencode(dict(page=page))
         
-        self.render("blog/list.html", 
+        self.render("blog/tag.html",
                     page_obj=page_obj,
-                    page_url=page_url)
+                    page_url=page_url,
+                    tagname=tag.name)
         return 
 
 
@@ -145,7 +146,10 @@ class People(RequestHandler):
         page_url = lambda page: self.reverse_url('people', username) + \
                                 '?%s' % urllib.urlencode(dict(page=page))
     
-        self.render("blog/people.html", page_obj=page_obj, page_url=page_url, people=people)
+        self.render("blog/people.html", 
+                    page_obj=page_obj,
+                    page_url=page_url,
+                    people=people)
         return     
 
 

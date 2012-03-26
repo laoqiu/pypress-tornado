@@ -1,4 +1,4 @@
-html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,ul,li {
+html,body,h1,h2,h3,h4,h5,h6,td,th,dd,p,div,ol,ul,li {
     margin: 0;
     padding: 0;
 }
@@ -164,11 +164,16 @@ blockquote {
     border-bottom: 1px dotted #ccc;
 }
 
-#search input.text {
+.sidebar #search input.text {
     padding: 2px;
     width: 160px;
     border: 1px solid #ccc;
     background: #fff url('find.png') no-repeat right 50%;
+}
+.sidebar #tags li {
+    display: inline;
+    border: 0;
+    padding-right: 10px;
 }
 
 #post-form input.text {
@@ -278,6 +283,9 @@ blockquote {
 }
 .post-content p {
     margin: 10px auto;
+}
+.post-content ol, .post-content ul {
+    margin: 20px 30px;
 }
 .post-content pre {
     display: block;

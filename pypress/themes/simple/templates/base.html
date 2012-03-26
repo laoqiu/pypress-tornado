@@ -70,13 +70,31 @@
             <div class="content">
             {% block content %}{% end %}
             </div>
+            {% block sidebar %}
             <div class="sidebar">
-                {% block sidebar %}
+                {% block search %}
                 <div id="search" class="sidebar-module">
                     <form action="{{ reverse_url('search') }}">
                         <input name="q" type="text" class="text" />
                     </form>
                 </div>
+                {% end %}
+                {% block tag_cloud %}
+                <div id="tags" class="sidebar-module">
+                    <h3>{{ _("Tags") }}</h3>
+                    {% set tag_cloud = handler.get_cached_items('tags') %}
+                    {% if tag_cloud %}
+                    <ul>
+                        {% for tag in tag_cloud %}
+                        <li><a href="{{ tag.url }}" class="tag-{{ tag.size>10 and 10 or tag.size }}">{{ tag.name }}</a></li>
+                        {% end %}
+                    </ul>
+                    {% else %}
+                    <div class="error-no-data">{{ _('No tags') }}</div>
+                    {% end %}
+                </div>
+                {% end %}
+                {% block latest_coments %}
                 <div class="sidebar-module">
                     <h3>{{ _("Latest comments") }}</h3>
                     {% set comments = handler.get_cached_items('latest_comments') %}
@@ -93,7 +111,25 @@
                     {% end %}
                 </div>
                 {% end %}
+                {% block links %}
+                <div class="sidebar-module">
+                    <h3>{{ _("Links") }}</h3>
+                    {% set links = handler.get_cached_items('links') %}
+                    {% if links %}
+                    <ul>
+                        {% for link in links %}
+                        <li>
+                        <a href="{{ link.url }}">#{{ link.name }}</a>
+                        </li>
+                        {% end %}
+                    </ul>
+                    {% else %}
+                    <div class="error-no-data">{{ _('No links') }}</div>
+                    {% end %}
+                </div>
+                {% end %}
             </div>
+            {% end %}
         </div>
     </div>
     <div id="footer">
