@@ -1286,6 +1286,7 @@
                 htmlsource : '源码',
                 formatblock : '标题',
                 pagebreaks : '文章分页',
+                code : '插入代码',
                 h1 : "标题 1",
                 h2 : "标题 2",
                 h3 :"标题 3",

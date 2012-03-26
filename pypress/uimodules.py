@@ -17,3 +17,7 @@ class Comment(tornado.web.UIModule):
     def render(self, comment, form):
         return self.render_string("blog/module-comment.html", comment=comment, form=form)
 
+class Paginate(tornado.web.UIModule):
+    def render(self, page_obj, page_url, *args):
+        return self.render_string(
+            "macros/_page.html", page_obj=page_obj, page_url=page_url, *args)

@@ -1,0 +1,28 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Links") }}{% end %}
+{% block content %}
+<h2>{{ _("Links") }}</h2>
+<div class="links">
+    <ul>
+    {% for link in page_obj.items %}
+        {% if link.passed %}
+        <li>
+        <a href="{{ link.link }}" target="_blank">{{ link.name }}</a> #{{ link.description }}
+        </li>
+        {% else %}
+            {% if current_user.is_admin %}
+            <li>
+            {{ link.link }} #{{ link.name }}
+            <span>
+                <a href="{{ reverse_url('link_pass', link.id) }}">{{ _("Pass") }}</a>
+                <a href="{{ reverse_url('link_delete', link.id) }}">{{ _("Delete") }}</a>
+            </span>
+            </li>
+            {% end %}
+        {% end %}
+    {% end %}
+    </ul>
+    {% module Paginate(page_obj, page_url) %}
+</div>
+{% end %}
+

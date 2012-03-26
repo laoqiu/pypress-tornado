@@ -34,31 +34,45 @@ class Links(RequestHandler):
 
 @route(r'/link/add', name='link_add')
 class Add(RequestHandler):
-    @tornado.web.authenticated
-    @admin.require(401)
-    def post(self):
+    def get(self):
 
-        url = self.get_args('url')
-        name = self.get_args('name')
-        email = self.get_args('email')
-        logo = self.get_args('logo')
-        description = self.get_args('description')
+        form = self.forms.LinkForm()
+
+        self.render("links/add.html", form=form)
+        return 
+
+    def post(self):
         
-        if url and name:
-            link = Link(name=name, 
-                        link=url,
-                        email=email,
-                        logo=logo,
-                        description=description,
-                        passed=True)
+        form = self.forms.LinkForm(self.request.arguments)
+
+        if form.validate():
+            
+            link = Link()
+            form.populate_obj(link)
 
             db.session.add(link)
             db.session.commit()
+
+            self.flash("Waiting for passed...")
             
             next_url = self.get_args('next', self.reverse_url('links'))
-        else:
-            next_url = self.request.uri
+            self.redirect(next_url)
 
+        self.render("links/add.html", form=form)
+        return
+
+
+@route(r'/link/(\d+)/pass', name='link_pass')
+class Pass(RequestHandler):
+    @tornado.web.authenticated
+    @admin.require(401)
+    def get(self, id):
+
+        link = Link.query.get_or_404(int(id))
+        
+        link.passed = True
+
+        next_url = self.get_args('next', self.reverse_url('links'))
         self.redirect(next_url)
         return
 
@@ -67,11 +81,12 @@ class Add(RequestHandler):
 class Delete(RequestHandler):
     @tornado.web.authenticated
     @admin.require(401)
-    def post(self, id):
+    def get(self, id):
 
         link = Link.query.get_or_404(int(id))
         
         db.session.delete(link)
+        db.session.commit()
         
         next_url = self.get_args('next', self.reverse_url('links'))
         self.redirect(next_url)

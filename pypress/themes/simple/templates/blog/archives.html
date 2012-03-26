@@ -1,7 +1,7 @@
 {% extends "../base.html" %}
 {% block title %}{{ _("Archives") }}{% end %}
 {% block content %}
-<h2>Archives</h2>
+<h2>{{ _("Archives") }}</h2>
 <div class="archives">
 {% for index, post in enumerate(page_obj.items) %}
     {% if index==0 %}
@@ -19,5 +19,6 @@
     {% end %}
 {% end %}
     </ul>
+    {% module Paginate(page_obj, page_url) %}
 </div>
 {% end %}

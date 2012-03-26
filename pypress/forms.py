@@ -173,13 +173,6 @@ def create_forms():
                 submit = SubmitField(_("Save"))
 
 
-            class TemplateForm(Form):
-                html = TextAreaField(_("HTML"), validators=[
-                                required(message=_("HTML required"))])
-                
-                submit = SubmitField(_("Save"))
-                cancel = SubmitField(_("Cancel"))
-        
         _forms[locale] = FormWrapper
 
     return _forms

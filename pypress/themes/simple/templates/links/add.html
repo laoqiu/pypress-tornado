@@ -1,0 +1,37 @@
+{% extends "../base.html" %}
+{% block title %}{{ _("Add Link") }}{% end %}
+{% block content %}
+<div class="form">
+    <h2>{{ _("Add Link") }}</h2>
+    {% from pypress.filters import field_errors %}
+    <form action="" method="POST">
+        {{ xsrf_form_html() }}
+        <div class="form-field">
+            {{ form.name.label() }} 
+            {{ form.name(class_="text") }}
+            {{ field_errors(form.name) }}
+        </div>
+        <div class="form-field">
+            {{ form.link.label() }} 
+            {{ form.link(class_="text") }}
+            {{ field_errors(form.link) }}
+        </div>
+        <div class="form-field">
+            {{ form.logo.label() }} 
+            {{ form.logo(class_="text") }}
+            {{ field_errors(form.logo) }}
+        </div>
+        <div class="form-field">
+            {{ form.email.label() }} 
+            {{ form.email(class_="text") }}
+            {{ field_errors(form.email) }}
+        </div>
+        <div class="form-field">
+            {{ form.description.label() }} 
+            {{ form.description(style="width: 300px;", class_="text") }}
+            {{ field_errors(form.description) }}
+        </div>
+        <div class="form-field">{{ form.submit(class_="form-button") }} </div>
+    </form>
+</div>
+{% end %}

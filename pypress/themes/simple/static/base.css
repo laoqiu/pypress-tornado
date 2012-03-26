@@ -163,6 +163,9 @@ blockquote {
     padding: 5px 0;
     border-bottom: 1px dotted #ccc;
 }
+.sidebar-module-foot {
+    padding: 10px 0;
+}
 
 .sidebar #search input.text {
     padding: 2px;
@@ -420,16 +423,37 @@ a.tag-10 { color:#c60; font-size: 2em; font-weight: 900; }
     color: #999;
 }
 
-.archives ul {
+.archives ul, .links ul {
     margin-left: 20px;
 }
-.archives ul li {
+.archives ul li, .links ul li {
     list-style-type: square;
     line-height: 2em;
 }
 .archives ul li span {
     float: right;
     color: #999;
+}
+
+.links ul li {
+    position: relative;
+    padding-right: 20px;
+}
+.links ul li:hover {
+    background: #ddd;
+}
+.links ul li span {
+    position: absolute;
+    right: 0;
+}
+.pagination span {
+    font-size: 14px;
+}
+.pagination span.previous {
+    float: left;
+}
+.pagination span.next {
+    float: right;
 }
 
 /***** footer *****/

@@ -54,6 +54,7 @@ class Link(db.Model):
                     name=self.name,
                     url=self.link,
                     logo=self.logo,
+                    description=self.description,
                     created_date=self.created_date)
     
     @cached_property

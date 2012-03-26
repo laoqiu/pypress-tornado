@@ -51,7 +51,10 @@
                         <a href="{{ reverse_url("archives") }}">{{ _("Archives") }}</a>
                     </li>
                     <li>
-                    <a href="{{ reverse_url('post') }}">{{ _("Post Now") }}</a>
+                        <a href="{{ reverse_url("links") }}">{{ _("Links") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ reverse_url('post') }}">{{ _("Post Now") }}</a>
                     </li>
                 </ul>
             </div>
@@ -119,13 +122,14 @@
                     <ul>
                         {% for link in links %}
                         <li>
-                        <a href="{{ link.url }}">#{{ link.name }}</a>
+                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a> #{{ link.description }}
                         </li>
                         {% end %}
                     </ul>
                     {% else %}
                     <div class="error-no-data">{{ _('No links') }}</div>
                     {% end %}
+                    <div class="sidebar-module-foot"><a href="{{ reverse_url('link_add') }}">{{ _('Apply friend link') }}</a></div>
                 </div>
                 {% end %}
             </div>

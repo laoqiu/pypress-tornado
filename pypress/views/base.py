@@ -90,7 +90,7 @@ class CachedItemsMixIn(object):
         elif name == 'tags':
             items = Tag.query.cloud()
         elif name == 'links':
-            items = [link.item for link in Link.query.limit(limit)]
+            items = [link.item for link in Link.query.filter(Link.passed==True).limit(limit)]
         cache.set(name, items)
         return items
 
