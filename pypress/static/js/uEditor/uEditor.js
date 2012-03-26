@@ -951,8 +951,14 @@
                         return;
                     }
                     var url = prompt(editor.settings.translation.linkURL, "http://");
-                    if (url != null) {			
+                    if (url != null) {
                         editor.iframe.contentWindow.document.execCommand("CreateLink", false, url);
+                        var parentnode = editor.toolbar.getNode(editor);
+                        if (parentnode != null) {
+                            $.each($(parentnode).children(), function(i,element){
+                                if ($(element).is('a')) $(element).attr('target','_blank');
+                            })
+                        }
                         editor.toolbar.setState('link', "on");
                     }
                 }
@@ -1350,6 +1356,7 @@
                 'src',
                 'style',
                 'lang',
+                'target',
                 'width',
                 'height'
             ];
