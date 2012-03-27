@@ -9,7 +9,7 @@
     <ul>
     {% end %}
     <li>
-        <span>{{ locale.format_day(post.created_date) }}</span>
+    <span>{{ post.author.nickname }}, {{ locale.format_day(post.created_date, dow=False) }}</span>
         <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
     {% if post.prev_post and post.created_date.year != post.prev_post.created_date.year %}

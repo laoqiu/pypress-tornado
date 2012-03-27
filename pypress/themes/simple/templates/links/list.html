@@ -3,6 +3,7 @@
 {% block content %}
 <h2>{{ _("Links") }}</h2>
 <div class="links">
+    {% if page_obj.total %}
     <ul>
     {% for link in page_obj.items %}
         {% if link.passed %}
@@ -23,6 +24,9 @@
     {% end %}
     </ul>
     {% module Paginate(page_obj, page_url) %}
+    {% else %}
+    <div class="error-no-data">No links yet.</div>
+    {% end %}
 </div>
 {% end %}
 

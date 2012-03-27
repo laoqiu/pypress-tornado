@@ -1,11 +1,11 @@
 <div id="post-list">
-    {% if page_obj.items %}
+    {% if page_obj.total %}
         {% for post in page_obj.items %}
             {% module Post(post) %}
         {% end %}
         {% module Paginate(page_obj, page_url) %}
     {% else %}
-        <div class="error-no-data">No post</div>
+    <div class="error-no-data">No post yet. <strong><a href="{{ reverse_url('post') }}">Post Now</a></strong></div>
     {% end %}
 </div>
 

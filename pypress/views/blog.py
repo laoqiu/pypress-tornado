@@ -205,7 +205,6 @@ class View(RequestHandler):
 @route(r'/post', name='post')
 class Submit(RequestHandler):
     @tornado.web.authenticated
-    @admin.require(401)
     def get(self):
         
         form = self.forms.PostForm(next=self.get_args('next',''))
