@@ -171,7 +171,7 @@ blockquote {
     padding: 2px;
     width: 160px;
     border: 1px solid #ccc;
-    background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAAEgAAABIAEbJaz4AAAAJdnBBZwAAABAAAAAQAFzGrcMAAADcSURBVCjPhdG9TgJhEIXh58M1EGEFjEohiUGk4f4vBaSy0UYRBFEIP8JaLEvWhOjbTc6bzMlMSPxNRICGpopgZejJJosTIRGCtjtLE1uxmrGeZSZEaGh5NzBH5Na9jp7ksMKNtQcL8O1R2bXYLBUKqBjv45QXJ86yoYBg96v4zr55JqzECjmhamedF4ZqWoe4runTJHcHzy60lb3aqmo6tVHJSoZEoKTjSoSdL5GShZ5ZdqhUPVcWrEzVdRXN9X3khTyXuooW+sm04BgjAyux+7TkMd4kWkaE/979AxXnQ1s0DN1UAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDEwLTAyLTExVDExOjUwOjA4LTA2OjAw1hBl+wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAwNi0wNS0wNVQxMzoyMjo0MC0wNTowML/k/hoAAAAASUVORK5CYII=') no-repeat right 50%;
+    background: #fff url('find.png') no-repeat right 50%;
 }
 .sidebar #tags li {
     display: inline;
@@ -205,7 +205,7 @@ blockquote {
 }
 .form-button {
     cursor: pointer;
-    background: #EA4C89 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAADICAYAAADodcFZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGFJREFUeNrs0DERADAMxLCkRMof5ZdEsvRkABrcSW4Ndmo4IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAL/ADuJh0AgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgE7oNPgAEA6FQHqA6DyMsAAAAASUVORK5CYII=') repeat-x scroll 0 50%;
+    background: #EA4C89 url("glass-light.png") repeat-x scroll 0 50%;
     border: medium none;
     -moz-border-radius: 6px;
     -khtml-border-radius: 6px;
