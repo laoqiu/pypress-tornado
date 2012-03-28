@@ -467,7 +467,15 @@
             createColorPanel : function () {
                 var colors = [
                     [['#000','#444','#666','#999','#CCC','#EEE','#F3F3F3','#FFF']], 
-                    [['#F00','#F90','#FF0','#0F0','#0FF','#00F','#90F','#F0F']] 
+                    [['#F00','#F90','#FF0','#0F0','#0FF','#00F','#90F','#F0F']],
+                    [
+                        ['#F4CCCC','#FCE5CD','#FFF2CC','#D9EAD3','#D0E0E3','#CFE2F3','#D9D2E9','#EAD1DC'],
+                        ['#EA9999','#F9CB9C','#FFE599','#B6D7A8','#A2C4C9','#9FC5E8','#B4A7D6','#D5A6BD'],
+                        ['#E06666','#F6B26B','#FFD966','#93C47D','#76A5AF','#6FA8DC','#8E7CC3','#C27BAD'],
+                        ['#CC0000','#E69138','#F1C232','#6AA84F','#45818E','#3D85C6','#674EA7','#A64D79'],
+                        ['#990000','#B45F06','#BF9000','#38761D','#134F5C','#0B5394','#351C75','#741B47'],
+                        ['#660000','#783F04','#7F6000','#274E13','#0C343D','#073763','#20124D','#4C1130']
+                    ]
                 ];
                 var html = ' \
                     <div class="uEditor-color uEditor-dialog" onmousedown="return false;"> \
@@ -589,6 +597,8 @@
                         html = $(this.input).val();
                         // add \r\n
                         html = html.replace(/<\/([^>]*)>/g, '</\$1>\r\n');
+                        html = html.replace(/&gt;/g, '>');
+                        html = html.replace(/&lt;/g, '<');
                         $(this.textarea).val(html);
                         $(this.iframe).replaceWith(this.textarea);
                         this.toolbar.disable();
@@ -709,7 +719,14 @@
                     this.paragraphise();
                     this.cleanSource();
                 }
-                else $(this.input).val($(this.textarea).val());
+                else {
+                    var html = $(this.textarea).val();
+                    html = html.replace(/<pre([^>]+)?>([\w\W]+?)<\/pre>/g, function(match, lang, code){
+                        code = code.replace('<', '&lt;').replace('>', '&gt;');
+                        return '<pre'+lang +'">'+ code +'</pre>';
+                    })
+                    $(this.input).val(html);
+                }
             },
             
             init : function(settings) {

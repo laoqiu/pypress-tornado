@@ -47,6 +47,6 @@ pypress原也是自己的学习项目，没想到还有许多朋友来邮件表�
 
 3.  去除了twitter相关内容
 
-项目演示: laoqiu.com [laoqiu](http://laoqiu.com/ "laoqiu blog")
+项目演示: [laoqiu.com](http://laoqiu.com/ "laoqiu blog")
 
 
