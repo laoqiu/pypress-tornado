@@ -16,6 +16,7 @@ from pypress.extensions.cache import cached_property, cache
 from pypress.extensions.routing import route
 from pypress.extensions.permission import Permission, UserNeed
 from pypress.helpers import storage, slugify, markdown, endtags
+from pypress.permissions import admin, moderator
 from pypress.database import db
 from pypress.models.users import User
 
@@ -385,11 +386,11 @@ class Comment(db.Model):
     
         @cached_property
         def reply(self):
-            return Permission(UserNeed(self.obj.author_id))
+            return Permission(UserNeed(self.obj.post.author_id))
 
         @cached_property
         def delete(self):
-            return Permission(UserNeed(self.obj.author_id))
+            return admin & moderator
 
         
     def __init__(self, *args, **kwargs):

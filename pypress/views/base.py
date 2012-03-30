@@ -6,7 +6,6 @@
     :author: laoqiu.com@gmail.com
 """
 import os
-import cPickle as pickle
 
 import logging
 import tornado.web
@@ -22,6 +21,7 @@ from pypress.database import db
 from pypress.models import Comment, Tag, Link
 from pypress.extensions.permission import Identity, AnonymousIdentity
 from pypress.extensions.cache import cache
+from pypress.extensions.sessions import RedisSession, Session
 
 
 class FlashMessageMixIn(object):
@@ -102,10 +102,24 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
         db.session.remove()
 
     def get_current_user(self):
-        user = self.get_secure_cookie("user")
-        if user:
-            return pickle.loads(user)
-        return None
+        user = self.session['user'] if 'user' in self.session else None
+        return user
+    
+    @property
+    def session(self):
+        if hasattr(self, '_session'):
+            return self._session
+        else:
+            self.require_setting('permanent_session_lifetime', 'session')
+            expires = self.settings['permanent_session_lifetime'] or None
+            if 'redis_server' in self.settings and self.settings['redis_server']:
+                sessionid = self.get_secure_cookie('sid')
+                self._session = RedisSession(self.application.session_store, sessionid, expires_days=expires)
+                if not sessionid: 
+                    self.set_secure_cookie('sid', self._session.id, expires_days=expires)
+            else:
+                self._session = Session(self.get_secure_cookie, self.set_secure_cookie, expires_days=expires)
+            return self._session
     
     def get_user_locale(self):
         code = self.get_cookie('lang', self.settings.get('default_locale', 'zh_CN'))

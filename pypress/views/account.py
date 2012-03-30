@@ -35,8 +35,9 @@ class Login(RequestHandler):
                 db.session.commit()
 
                 # set cookie
-                user = User.query.get(user.id)
-                self.set_secure_cookie("user", pickle.dumps(user))
+                self.session['user'] = user
+                # self.session.set_expires(days=2)
+                self.session.save()
 
                 # flash
                 self.flash(self._("Welcome back, %s" % user.username), "success")
@@ -58,7 +59,8 @@ class Login(RequestHandler):
 class Logout(RequestHandler):
     def get(self):
         
-        self.clear_cookie("user")
+        del self.session["user"]
+        self.session.save()
         
         # redirect
         next_url = self.get_args('next')
@@ -93,8 +95,7 @@ class Signup(RequestHandler):
                 db.session.delete(code)
                 db.session.commit()
                 
-                user = User.query.get(user.id)
-                self.set_secure_cookie('user', pickle.dumps(user))
+                self.session['user'] = user
 
                 next_url = form.next.data
 

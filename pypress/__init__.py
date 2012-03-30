@@ -6,6 +6,7 @@
     :author: laoqiu.com@gmail.com
 """
 import os
+import redis
 
 import tornado.web
 import tornado.locale
@@ -19,6 +20,7 @@ from pypress.forms import create_forms
 from pypress.views import account, blog, links, ErrorHandler
 from pypress.database import db, models_committed
 from pypress.extensions.routing import Route
+from pypress.extensions.sessions import RedisSessionStore
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -43,8 +45,10 @@ class Application(tornado.web.Application):
 
         tornado.web.Application.__init__(self, handlers, **settings)
         
-        Application.forms = create_forms()
-
+        self.forms = create_forms()
+        self.redis = redis.StrictRedis()
+        self.session_store = RedisSessionStore(self.redis)
+        
         configure_signals(db.sender)
     
         
