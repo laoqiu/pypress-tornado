@@ -11,10 +11,8 @@
         {{ comment.markdown }}
 
         {% if current_user %}
-        <div class="comment-meta">
-            {% if comment.permissions.reply.can(handler.identity) and comment.parent_id is None %}
-            <a href="#" class="comment-reply">{{ _("reply") }}</a> 
-            {% end %}
+        <div class="comment-meta" style="display:none;">
+            <a href="#" data-id="{{ comment.id }}" data-nickname="{{ comment.nickname }}" class="comment-reply">{{ _("reply") }}</a> 
             {% if comment.permissions.delete.can(handler.identity) %}
             <a href="#" onclick="$('#delete-comment-{{ comment.id }}').toggle(); return false;" class="comment-delete">{{ _("delete") }}</a>
                 <div id="delete-comment-{{ comment.id }}" style="display:none;">

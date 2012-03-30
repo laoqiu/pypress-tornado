@@ -8,6 +8,17 @@
 <script type="text/javascript">
 $(function(){
     get_captcha('{{ reverse_url('get_captcha') }}');
+    $('.comment-reply').click(function(){
+        var id = $(this).data('id');
+        var nickname = $(this).data('nickname');
+        $('textarea#comment').focus().val('@ ['+ nickname +'](#comment-'+ id +'): ');
+        return false;
+    })
+    $('.comment-list li.comment').hover(function(){
+        $(this).find('.comment-meta').show();
+    },function(){
+        $(this).find('.comment-meta').hide();
+    })
 })
 </script>
 {% end %}
@@ -45,34 +56,35 @@ $(function(){
             {{ form.nickname(type='hidden',value=current_user.nickname) }}
             {{ form.website(type='hidden') }}
         {% else %}                    
-            <p>
+            <div>
                 {{ form.email.label() }}
                 {{ form.email(class_="text") }} 
                 {{ field_errors(form.email) }}
-            </p>
-            <p>
+            </div>
+            <div>
                 {{ form.nickname.label() }}
                 {{ form.nickname(class_="text") }} 
                 {{ field_errors(form.nickname) }}
-            </p>
-            <p>
+            </div>
+            <div>
                 {{ form.website.label() }}
                 {{ form.website(class_="text") }} 
                 {{ field_errors(form.website) }}
-            </p>
+            </div>
         {% end %}
-            <p>
+            <div>
                 {{ form.comment.label() }}
                 {{ form.comment(class_="text") }}
                 {{ field_errors(form.comment) }}
-            </p>
-            <p>
+                <p class="explain">_italic_, __bold__, &lt;a&gt;: [example](http://url.com/ "Title"), &lt;img&gt;: ![alt text](/path/img.jpg "Title") </p>
+            </div>
+            <div>
                 {{ form.captcha.label() }}
                 {{ form.captcha(class_="text") }}
                 <a href="javascript: get_captcha('{{ reverse_url('get_captcha') }}');" title="看不清楚，换一张"><img id="captcha-image" src="/static/images/blank.gif" /></a>
                 {{ field_errors(form.captcha) }}
-            </p>
-            <p>{{ form.submit(class_="button") }}</p>
+            </div>
+            <div>{{ form.submit(class_="button") }}</div>
         </form>
     </div>
 

@@ -100,7 +100,7 @@
                 {% block latest_coments %}
                 <div class="sidebar-module">
                     <h3>{{ _("Latest comments") }}</h3>
-                    {% set comments = handler.get_cached_items('latest_comments') %}
+                    {% set comments = handler.get_cached_items('latest_comments')[:5] %}
                     {% if comments %}
                     <ul>
                         {% for comment in comments %}
