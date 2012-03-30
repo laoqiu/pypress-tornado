@@ -5,6 +5,10 @@ Pypress, 由python编写的团队博客
 * 2012-3-24: 加入第二套皮肤 simple
 * 2012-3-25: 完善侧栏最后评论功能
 * 2012-3-26: 完善友情链接模块功能
+* 2012-3-30: 加入session机制
+    * 支持redis存储或使用tornado的secure_cookie
+    * 使用不用方法时，只需要设置settings的REDIS_SERVER开关  
+    * 支持session有效期的设置，可使用PERMANENT_SESSION_LIFETIME
 
 
 ### 项目介绍
