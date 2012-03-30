@@ -112,6 +112,7 @@ class _SignallingSession(Session):
         self.sender = db.sender
         self._model_changes = {}
         Session.__init__(self, autocommit=autocommit, autoflush=autoflush,
+                         expire_on_commit=False,
                          extension=db.session_extensions,
                          bind=db.engine, **options)
 
