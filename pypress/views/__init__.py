@@ -1,2 +1,2 @@
 #!/usr/bin/env python
-from .base import ErrorHandler
+from .base import ErrorHandler, RequestHandler

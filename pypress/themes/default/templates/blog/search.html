@@ -1,7 +1,7 @@
 {% extends "../base.html" %}
 {% block title %}{{ _('Search') }}{% end %}
 {% block css %}
-<link rel="stylesheet" href="{{ reverse_url('theme_path', 'default/static/highlight.css') }}" />
+<link rel="stylesheet" href="{{ reverse_url('theme_static', 'highlight.css') }}" />
 {% end %}
 {% block content %}
 <h2>search by {{ keywords }}</h2>

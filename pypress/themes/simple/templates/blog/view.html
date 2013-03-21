@@ -1,10 +1,10 @@
 {% extends "../base.html" %}
 {% block title %}{{ post.title }}{% end %}
 {% block css %}
-<link rel="stylesheet" href="{{ reverse_url('theme_path', 'simple/static/highlight.css') }}" />
+<link rel="stylesheet" href="{{ reverse_url('theme_static', 'highlight.css') }}" />
 {% end %}
 {% block js %}
-<script type="text/javascript" src="{{ reverse_url('theme_path', 'simple/static/blog.js') }}"></script>
+<script type="text/javascript" src="{{ reverse_url('theme_static', 'blog.js') }}"></script>
 <script type="text/javascript">
 $(function(){
     get_captcha('{{ reverse_url('get_captcha') }}');

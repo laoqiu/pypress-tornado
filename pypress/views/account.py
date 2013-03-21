@@ -8,7 +8,7 @@
 from datetime import datetime
 import cPickle as pickle
 
-from pypress.views.base import RequestHandler
+from pypress.views import RequestHandler
 from pypress.database import db
 from pypress.models import User, UserCode
 from pypress.extensions.routing import route

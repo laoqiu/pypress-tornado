@@ -27,7 +27,7 @@ class Application(tornado.web.Application):
         settings = setting_from_object(config)
         handlers = [
             # other handlers...
-            url(r"/theme/(.+)", tornado.web.StaticFileHandler, dict(path=settings['theme_path']), name='theme_path'),
+            url(r"/theme/static/(.+)", tornado.web.StaticFileHandler, dict(path=settings['theme_static_path']), name='theme_static'),
             url(r"/upload/(.+)", tornado.web.StaticFileHandler, dict(path=settings['upload_path']), name='upload_path')
         ] + Route.routes()
         
@@ -46,7 +46,8 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
         
         self.forms = create_forms()
-        self.redis = redis.StrictRedis()
+        pool = redis.ConnectionPool(host=settings['redis_host'], port=settings['redis_port'], db=settings['redis_db'])
+        self.redis = redis.Redis(connection_pool=pool)
         self.session_store = RedisSessionStore(self.redis)
         
         configure_signals(db.sender)

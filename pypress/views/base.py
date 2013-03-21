@@ -126,8 +126,8 @@ class RequestHandler(tornado.web.RequestHandler, PermissionMixIn, FlashMessageMi
         return tornado.locale.get(code)
     
     def get_template_path(self):
-        if 'theme_path' in self.settings:
-            return os.path.join(self.settings['theme_path'], self.settings.get('theme_name', 'default'), 'templates')
+        if 'theme_template_path' in self.settings:
+            return self.settings['theme_template_path']
         return self.settings.get('template_path')
     
     def get_error_html(self, status_code, **kwargs):

@@ -4,7 +4,7 @@
         <a href="{{ comment.author.website or '#' }}"><img src="{{ gravatar(comment.author.email, size=50) }}" alt="{{ comment.author.nickname }}" /></a>
     </div>
     <div class="comment-by">
-        <cite class="fn">{{ comment.author.nickname }}</cite>
+        <cite class="fn"><a href="mailto:{{ comment.author.email }}">{{ comment.author.nickname }}</a></cite>
         <abbr title="{{ comment.created_date }}" class="comment-time">{{ locale.format_date(comment.created_date) }}</abbr>
     </div>
     <div class="comment-text">

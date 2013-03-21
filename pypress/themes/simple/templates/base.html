@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% end %} - Pypress by tornado</title>
-    <link rel="stylesheet" href="{{ reverse_url('theme_path','simple/static/base.css') }}" />
+    <link rel="stylesheet" href="{{ reverse_url('theme_static','base.css') }}" />
     {% block css %}{% end %}
     <script type="text/javascript" src="{{ static_url('js/jquery.min.js') }}"></script>
     <script type="text/javascript">
@@ -24,6 +24,20 @@
     })
     </script>
     {% block js %}{% end %}
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30950818-1']);
+      _gaq.push(['_setDomainName', 'laoqiu.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
 </head>
 <body>
 <div id="wrap">

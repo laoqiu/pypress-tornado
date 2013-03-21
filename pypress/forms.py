@@ -17,7 +17,7 @@ def create_forms():
     
     _forms = {}
     
-    for locale in tornado.locale.get_supported_locales(None):
+    for locale in tornado.locale.get_supported_locales():
 
         _ = tornado.locale.get(locale).translate
         #logging.info('create forms: %s' % locale)

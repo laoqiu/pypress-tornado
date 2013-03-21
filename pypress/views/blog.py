@@ -14,12 +14,11 @@ import tornado.escape
 
 from datetime import datetime
 
-from pypress.views.base import RequestHandler
+from pypress.views import RequestHandler
 from pypress.database import db
 from pypress.models import User, Post, Tag, Comment
 from pypress.helpers import generate_random
 from pypress.utils.imagelib import Recaptcha
-from pypress.permissions import admin
 from pypress.extensions.routing import route
 
 
