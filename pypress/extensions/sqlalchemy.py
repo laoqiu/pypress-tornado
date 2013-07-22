@@ -9,7 +9,7 @@
 from __future__ import with_statement, absolute_import
 import re
 import uuid
-from math import ceil
+#from math import ceil
 import functools
 from functools import partial
 import sqlalchemy
@@ -24,6 +24,7 @@ from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.util import to_list
 from .signals import Namespace
 
+from .cache import cached_property
 import tornado.web
 
 _camelcase_re = re.compile(r'([A-Z]+)(?=[a-z0-9])')
@@ -214,21 +215,22 @@ class _ModelTableNameDescriptor(object):
 
 
 class Pagination(object):
-    def __init__(self, query, page, per_page):
+    def __init__(self, query, page, per_page=20):
         self.query = query
         self.per_page = per_page
-        self.page = page
+        max_page = max(0, self.total - 1) // per_page + 1
+        self.page =  max_page if page > max_page  else page
 
-    @property
+    @cached_property
     def total(self):
         return self.query.count()
     
-    @property
+    @cached_property
     def items(self):
-        return self.query.offset((self.page - 1) * self.per_page).limit(self.per_page)
+        return self.query.offset((self.page - 1) * self.per_page).limit(self.per_page).all()
 
-    def iter_pages(self, left_edge=2, left_current=2,
-                   right_current=5, right_edge=2):
+    def iter_pages(self, left_edge=1, left_current=1,
+                   right_current=2, right_edge=1):
         last = 0
         for num in xrange(1, self.pages + 1):
             if num <= left_edge or \
@@ -239,12 +241,26 @@ class Pagination(object):
                     yield None
                 yield num
                 last = num
-        
-    has_prev = property(lambda x: x.page > 1)
-    prev_num = property(lambda x: x.page - 1)
-    has_next = property(lambda x: x.page < x.pages)
-    next_num = property(lambda x: x.page + 1)
-    pages = property(lambda x: max(0, x.total - 1) // x.per_page + 1)
+    
+    @cached_property
+    def has_prev(self):
+        return self.page > 1
+    
+    @cached_property
+    def prev_num(self):
+        return self.page - 1
+    
+    @cached_property
+    def has_next(self):
+        return self.page < self.pages
+    
+    @cached_property
+    def next_num(self):
+        return self.page + 1
+    
+    @cached_property
+    def pages(self):
+        return max(0, self.total - 1) // self.per_page + 1
 
 
 class BaseQuery(orm.Query):
